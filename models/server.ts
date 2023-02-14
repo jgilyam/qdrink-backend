@@ -21,8 +21,8 @@ class Server {
   async dbConnection() {
     try {
       await db.authenticate();
-    } catch (error) {
-      throw new Error(error);
+    } catch (e: any) {
+      throw new Error(e);
     }
   }
 
