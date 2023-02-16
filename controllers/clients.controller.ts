@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
+import { PrismaClient } from "@prisma/client";
 
-export const findAllClients = (req: Request, res: Response) => {
-  res.json({
-    msg: "findAllClients",
-  });
+const prisma = new PrismaClient();
+
+export const findAllClients = async (req: Request, res: Response) => {
+  const clients = await prisma.client.findMany();
+  res.json(clients);
 };
 
 export const findOneClient = (req: Request, res: Response) => {
@@ -15,7 +17,7 @@ export const findOneClient = (req: Request, res: Response) => {
   });
 };
 
-export const addClient = (req: Request, res: Response) => {
+export const addClient = async (req: Request, res: Response) => {
   const { body } = req;
 
   console.log(body);
