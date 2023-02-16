@@ -2,8 +2,6 @@ import express, { Application } from "express";
 import clientRoutes from "../routes/clients.routes";
 import cors from "cors";
 
-import db from "../db/connection";
-
 class Server {
   private app: Application;
   private port: string;
@@ -15,16 +13,11 @@ class Server {
     this.app = express();
     this.port = process.env.PORT || "8000";
 
+    this.dbConnection();
     this.middlewares();
     this.routes();
   }
-  async dbConnection() {
-    try {
-      await db.authenticate();
-    } catch (e: any) {
-      throw new Error(e);
-    }
-  }
+  async dbConnection() {}
 
   middlewares() {
     this.app.use(cors());
