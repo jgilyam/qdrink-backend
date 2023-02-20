@@ -5,6 +5,9 @@ Abrir dos terminales
 En una correr 'npm run devJs' y en la segunda correr 'npm run devTs'
 En la primera tendremos los errores en tiempo de ejecucion y la segunda los errores o mensajes en tiempo de compilación.
 
+## Actualizar las migraciones
+npx prisma migrate dev
+
 
 ## Error handling
 https://www.codeconcisely.com/posts/how-to-handle-errors-in-express-with-typescript/
