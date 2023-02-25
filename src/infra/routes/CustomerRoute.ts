@@ -3,11 +3,11 @@ import { Router } from "express";
 import { CurstomerService } from "../../aplication/CustomerService";
 import { CustomerController } from "../controllers/CustomerController";
 import { PrismaRepository } from "../repositories/PrismaReposiroty";
+import dbClient from "../clients/db";
 
 const router = Router();
-const prisma = new PrismaClient();
 
-const customerRepository = new PrismaRepository(prisma);
+const customerRepository = new PrismaRepository(dbClient);
 const customerService = new CurstomerService(customerRepository);
 const customerController = new CustomerController(customerService);
 
