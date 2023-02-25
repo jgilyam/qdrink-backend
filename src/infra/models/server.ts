@@ -1,12 +1,12 @@
 import express, { Application } from "express";
-import clientRoutes from "../routes/clients.routes";
+import clientRoutes from "../routes/CustomerRoute";
 import cors from "cors";
 
 class Server {
   private app: Application;
   private port: string;
   private apiPaths = {
-    clients: "/api/clients",
+    customers: "/api/customers",
   };
 
   constructor() {
@@ -26,7 +26,7 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.apiPaths.clients, clientRoutes);
+    this.app.use(this.apiPaths.customers, clientRoutes);
   }
 
   listen() {
