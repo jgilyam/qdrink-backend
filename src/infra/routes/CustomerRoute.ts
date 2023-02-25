@@ -1,13 +1,12 @@
-import { PrismaClient } from "@prisma/client";
 import { Router } from "express";
 import { CurstomerService } from "../../aplication/CustomerService";
 import { CustomerController } from "../controllers/CustomerController";
-import { PrismaRepository } from "../repositories/PrismaReposiroty";
 import dbClient from "../clients/db";
+import { CustomerRepository } from "../repositories/CustomerRepository";
 
 const router = Router();
 
-const customerRepository = new PrismaRepository(dbClient);
+const customerRepository = new CustomerRepository(dbClient);
 const customerService = new CurstomerService(customerRepository);
 const customerController = new CustomerController(customerService);
 
