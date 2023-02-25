@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import { CustomerEntity } from "../../domain/entities/CustomerEntity";
-import { CustomerRepositry } from "../../domain/repositories/CustomerRepository";
+import { ICustomerRepositry } from "../../domain/repositories/ICustomerRepository";
 import { CustomerValue } from "../../domain/value/CustomerValue";
 
-export class PrismaRepository implements CustomerRepositry {
+export class PrismaRepository implements ICustomerRepositry {
   constructor(private readonly db: PrismaClient) {}
   saveCustomer(customer: CustomerEntity): Promise<CustomerEntity | null> {
     throw new Error("Method not implemented.");

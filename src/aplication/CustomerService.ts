@@ -1,9 +1,9 @@
 import { CustomerEntity } from "../domain/entities/CustomerEntity";
-import { CustomerRepositry } from "../domain/repositories/CustomerRepository";
+import { ICustomerRepositry } from "../domain/repositories/ICustomerRepository";
 import { CustomerValue } from "../domain/value/CustomerValue";
 
 export class CurstomerService {
-  constructor(private readonly customerRepository: CustomerRepositry) {
+  constructor(private readonly customerRepository: ICustomerRepositry) {
     console.log("constructor de service");
   }
 
