@@ -1,4 +1,4 @@
-import { CustomerEntity } from "../entities/CustomerEntity";
+import { CustomerEntity } from "../entities";
 
 export interface CustomerRepositry {
   saveCustomer(customer: CustomerEntity): Promise<CustomerEntity | null>;
