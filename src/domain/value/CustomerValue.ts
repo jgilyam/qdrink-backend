@@ -7,15 +7,7 @@ export class CustomerValue implements CustomerEntity {
   name: string;
   phone: string;
 
-  constructor({
-    email,
-    name,
-    phone,
-  }: {
-    email: string;
-    name: string;
-    phone: string;
-  }) {
+  constructor({ email, name, phone }: CustomerDTO) {
     this.id = null;
     this.email = email;
     this.name = name;
