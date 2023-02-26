@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CurstomerService } from "../../aplication/CustomerService";
+import { CustomerDTO } from "../../domain/dtos/CustomerDTO";
 
 export class CustomerController {
   constructor(private readonly customerService: CurstomerService) {}
@@ -13,5 +14,11 @@ export class CustomerController {
     const { id } = req.params;
     await this.customerService.sendQr(parseInt(id));
     res.send("mensaje enviado");
+  };
+
+  public addCustomer = async (req: Request, res: Response) => {
+    const customerDTO: CustomerDTO = req.body;
+    const customerEntity = await this.customerService.addCustomer(customerDTO);
+    res.send({ customerEntity });
   };
 }
