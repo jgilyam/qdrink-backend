@@ -1,4 +1,4 @@
-import { CustomerEntity } from "../../domain/entities";
+import { CustomerEntity2 } from "../../domain/entities";
 import { BaseRepository } from "./BaseRepository";
 
-export class CustomerRepository extends BaseRepository<CustomerEntity> {}
+export class CustomerRepository extends BaseRepository<CustomerEntity2> {}
