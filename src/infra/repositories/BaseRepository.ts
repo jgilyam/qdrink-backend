@@ -1,10 +1,19 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { IRepository } from "../../domain/interfaces/IRepository";
 
 export abstract class BaseRepository<T> implements IRepository<T> {
   constructor(private readonly db: PrismaClient) {}
-  save(customer: T): Promise<T | null> {
-    throw new Error("Method not implemented.");
+  async save(customer: any): Promise<any> {
+    console.log(customer);
+    const data = {
+      data: {
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+      },
+    };
+    const customerEntity = await this.db.customer.create(data);
+    return customerEntity;
   }
   async findAll(): Promise<any> {
     // TODO: ver como es la forma para no utilizar el any
