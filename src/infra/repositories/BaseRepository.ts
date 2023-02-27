@@ -1,13 +1,17 @@
-import { IRepository } from "../../domain/interfaces/IRepository";
-
-export abstract class BaseRepository<T> implements IRepository<T> {
-  constructor() {}
+import { EntityTarget, ObjectLiteral, Repository } from "typeorm";
+import { CustomerEntity2 } from "../../domain/entities";
+import { IPersistence } from "../../domain/interfaces/IPersistence";
+import { db } from "../db/data-source";
+export abstract class BaseRepository<T> implements IPersistence<T> {
   async save(entity: T): Promise<any> {
-    throw new Error("Method not implemented.");
+    const repository = db.getRepository(CustomerEntity2);
+    return await repository.save(entity as any);
   }
   async findAll(): Promise<any> {
-    throw new Error("Method not implemented.");
+    const repository = db.getRepository(CustomerEntity2);
+    return await repository.find();
   }
+
   async findById(id: number): Promise<any> {
     throw new Error("Method not implemented.");
   }
