@@ -1,23 +1,19 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity({
+  name: "customers",
+  synchronize: false,
+})
 export class CustomerEntity2 {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  phone: string;
-
-  constructor(id: number, email: string, name: string, phone: string) {
-    this.id = id;
-    this.email = email;
-    this.name = name;
-    this.phone = phone;
-  }
+  phone!: string;
 }
