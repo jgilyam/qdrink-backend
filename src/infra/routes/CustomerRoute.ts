@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { CurstomerService } from "../../aplication/CustomerService";
 import { CustomerController } from "../controllers/CustomerController";
-import { CustomerRepository } from "../repositories/CustomerRepository";
+import { CustomerRepository } from "../db/CustomerRepository";
 import { MessagerClient } from "../clients/apiWhatsappBussines/MessagerClient";
 import { MessageMapper } from "../clients/apiWhatsappBussines/domain/mappers/MessageMapper";
 import { CustomerMapper } from "../../domain/mappers/CustomerMapper";

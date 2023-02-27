@@ -1,7 +1,7 @@
 import { DataSource, Entity, Repository } from "typeorm";
 import { CustomerEntity2 } from "../../domain/entities";
 import { IPersistence } from "../../domain/interfaces/IPersistence";
-import { BaseRepository } from "./BaseRepository";
+import { BaseRepository } from "../repositories/BaseRepository";
 
 export class CustomerRepository implements IPersistence<CustomerEntity2> {
   constructor(private readonly repository: Repository<CustomerEntity2>) {}
