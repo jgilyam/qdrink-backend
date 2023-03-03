@@ -1,7 +1,7 @@
 import { ObjectLiteral, Repository } from "typeorm";
 import { IPersistence } from "../../domain/interfaces/IPersistence";
 
-export class TypeOrmCustomerRepository<T extends ObjectLiteral>
+export class BaseRepository<T extends ObjectLiteral>
   implements IPersistence<T>
 {
   constructor(private readonly repository: Repository<T>) {}
