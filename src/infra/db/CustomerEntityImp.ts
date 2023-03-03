@@ -1,10 +1,11 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { CustomerEntity } from "../../domain/entities/CustomerEntity";
 
 @Entity({
   name: "customers",
   synchronize: false,
 })
-export class CustomerEntity2 {
+export class CustomerEntityImp implements CustomerEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

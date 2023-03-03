@@ -1,2 +1,2 @@
 export * from "./CustomerEntity";
-export * from "./CustomerEntity2";
+export * from "../../infra/db/CustomerEntityImp";

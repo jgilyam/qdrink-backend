@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { CustomerEntity2 } from "../../domain/entities";
+import { CustomerEntityImp } from "../../domain/entities";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -12,7 +12,7 @@ export const db = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true,
   logging: false,
-  entities: [CustomerEntity2],
+  entities: [CustomerEntityImp],
   subscribers: [],
   migrations: [],
 });
