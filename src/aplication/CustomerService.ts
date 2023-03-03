@@ -1,12 +1,12 @@
 import { CustomerDTO } from "../domain/dtos/CustomerDTO";
 import { CustomerEntity } from "../domain/entities/CustomerEntity";
 import { IMessaging } from "../domain/interfaces/IMessaging";
-import { IRepository } from "../domain/interfaces/IRepository";
+import { IPersistence } from "../domain/interfaces/IPersistence";
 import { CustomerMapper } from "../domain/mappers/CustomerMapper";
 
 export class CurstomerService {
   constructor(
-    private readonly customerRepository: IRepository<CustomerEntity>,
+    private readonly customerRepository: IPersistence<CustomerEntity>,
     private readonly messanger: IMessaging,
     private readonly customerMapper: CustomerMapper
   ) {}
@@ -29,5 +29,8 @@ export class CurstomerService {
         "imagen"
       );
     }
+  };
+  public findCustomerById = async (id: number) => {
+    return this.customerRepository.findById(id);
   };
 }

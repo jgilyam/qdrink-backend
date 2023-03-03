@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import clientRoutes from "../routes/CustomerRoute";
 import cors from "cors";
+import { db } from "../db/data-source";
 
 class Server {
   private app: Application;
@@ -17,7 +18,13 @@ class Server {
     this.middlewares();
     this.routes();
   }
-  async dbConnection() {}
+  dbConnection() {
+    db.initialize()
+      .then(() => {
+        console.log("Connection with db up");
+      })
+      .catch((error: any) => console.log(error));
+  }
 
   middlewares() {
     this.app.use(cors());
