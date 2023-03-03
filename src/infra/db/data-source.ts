@@ -2,6 +2,7 @@ import { DataSource } from "typeorm";
 import { CustomerEntityImp } from "../../domain/entities";
 import dotenv from "dotenv";
 
+const entities = [CustomerEntityImp];
 dotenv.config();
 export const db = new DataSource({
   type: "postgres",
@@ -10,9 +11,9 @@ export const db = new DataSource({
   username: process.env.DATASOURCE_USERNAME,
   password: process.env.DATASOURCE_PASSWORD,
   database: process.env.DB_NAME,
-  synchronize: true,
+  synchronize: false,
   logging: false,
-  entities: [CustomerEntityImp],
+  entities: entities,
   subscribers: [],
   migrations: [],
 });
