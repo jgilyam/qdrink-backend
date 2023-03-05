@@ -15,9 +15,11 @@ export class CurstomerService {
     const customerEntity = this.customerMapper.dtoToEntity(customerDTO);
     return await this.customerRepository.save(customerEntity);
   };
+
   public findAllCustomers = async () => {
     return await this.customerRepository.findAll();
   };
+
   public sendQr = async (customerId: number) => {
     const customer = await this.customerRepository.findById(customerId);
     if (customer == null) {
@@ -32,5 +34,9 @@ export class CurstomerService {
   };
   public findCustomerById = async (id: number) => {
     return this.customerRepository.findById(id);
+  };
+
+  public deleteCustomerById = async (id: number) => {
+    return this.customerRepository.deleteById(id);
   };
 }

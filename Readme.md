@@ -15,13 +15,3 @@ https://scoutapm.com/blog/express-error-handling
 https://reflectoring.io/express-error-handling/
 
 ## Manejo de migraciones
-
-Modificar el schema en schema.prima
-Correr 
-
-npx prisma migrate dev --name added_job_title 
-
-donde added_job_title, debe especificar la modificacion que se hizo ne l bd
-
-despues de generar cualquier cambio en el cliente, se requiere generarlo de vuelta con 
-npx prisma generate

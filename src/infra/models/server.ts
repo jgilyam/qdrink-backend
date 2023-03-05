@@ -1,14 +1,13 @@
 import express, { Application } from "express";
 import clientRoutes from "../routes/CustomerRoute";
 import cors from "cors";
-import { db } from "../db/data-source";
+import { db } from "../db/conecction";
+import { apiPaths } from "./apiPaths";
 
 class Server {
   private app: Application;
   private port: string;
-  private apiPaths = {
-    customers: "/api/customers",
-  };
+  private apiPaths = apiPaths;
 
   constructor() {
     this.app = express();
@@ -18,12 +17,15 @@ class Server {
     this.middlewares();
     this.routes();
   }
-  dbConnection() {
-    db.initialize()
-      .then(() => {
-        console.log("Connection with db up");
-      })
-      .catch((error: any) => console.log(error));
+  async dbConnection() {
+    try {
+      await db.authenticate();
+      console.log("Connection with db has been established successfully.");
+      await db.sync({ alter: true });
+      console.log("All models were synchronized successfully.");
+    } catch (error) {
+      console.error("Unable to connect to the database:", error);
+    }
   }
 
   middlewares() {
@@ -38,7 +40,7 @@ class Server {
 
   listen() {
     this.app.listen(this.port, () => {
-      console.log("Servidor corriendo en puerto!!!!!!!!!!!!!!! " + this.port);
+      console.log("🚀 Server is running in port: " + this.port);
     });
   }
 }
