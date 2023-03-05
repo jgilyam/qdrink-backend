@@ -2,13 +2,12 @@ import express, { Application } from "express";
 import clientRoutes from "../routes/CustomerRoute";
 import cors from "cors";
 import { db } from "../db/conecction";
+import { apiPaths } from "./apiPaths";
 
 class Server {
   private app: Application;
   private port: string;
-  private apiPaths = {
-    customers: "/api/customers",
-  };
+  private apiPaths = apiPaths;
 
   constructor() {
     this.app = express();
@@ -41,7 +40,7 @@ class Server {
 
   listen() {
     this.app.listen(this.port, () => {
-      console.log("Servidor corriendo en puerto!!!!!!!!!!!!!!! " + this.port);
+      console.log("🚀 Server is running in port: " + this.port);
     });
   }
 }
