@@ -1,4 +1,4 @@
-export interface IPersistence<T> {
+export interface IBaseRepository<T> {
   save(entity: T): Promise<T | null>;
   findAll(): Promise<T[] | null>;
   findById(id: number): Promise<T | null>;
