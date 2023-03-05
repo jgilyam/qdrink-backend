@@ -4,7 +4,6 @@ import { CustomerRepository } from "../../db/repositories/CustomerRepository";
 import { MessagerClient } from "../../clients/apiWhatsappBussines/MessagerClient";
 import { MessageMapper } from "../../clients/apiWhatsappBussines/domain/mappers/MessageMapper";
 import { CustomerMapper } from "../../../domain/mappers/CustomerMapper";
-import Customer from "../../db/models/CustomerEntityImp";
 
 const customerRepository = new CustomerRepository();
 const messageMapper = new MessageMapper();
