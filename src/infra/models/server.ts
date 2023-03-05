@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import clientRoutes from "../routes/CustomerRoute";
 import cors from "cors";
-import { db } from "../db/data-source";
+import { db } from "../db/conecction";
 
 class Server {
   private app: Application;
@@ -18,12 +18,15 @@ class Server {
     this.middlewares();
     this.routes();
   }
-  dbConnection() {
-    db.initialize()
-      .then(() => {
-        console.log("Connection with db up");
-      })
-      .catch((error: any) => console.log(error));
+  async dbConnection() {
+    try {
+      await db.authenticate();
+      console.log("Connection with db has been established successfully.");
+      await db.sync({ alter: true });
+      console.log("All models were synchronized successfully.");
+    } catch (error) {
+      console.error("Unable to connect to the database:", error);
+    }
   }
 
   middlewares() {
