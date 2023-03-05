@@ -8,5 +8,6 @@ router.get("/", customerController.findAllCustomers);
 router.get("/:id/sendMessage", customerController.sendMessage);
 router.post("/", customerController.addCustomer);
 router.get("/:id", customerController.findCustomerById);
+router.delete("/:id", customerController.deleteCustomerById);
 
 export default router;

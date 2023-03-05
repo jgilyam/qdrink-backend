@@ -1,6 +1,6 @@
 import { CurstomerService } from "../../../aplication/CustomerService";
 import { CustomerController } from "../../controllers/CustomerController";
-import { CustomerRepository } from "../../db/CustomerRepository";
+import { CustomerRepository } from "../../db/repositories/CustomerRepository";
 import { MessagerClient } from "../../clients/apiWhatsappBussines/MessagerClient";
 import { MessageMapper } from "../../clients/apiWhatsappBussines/domain/mappers/MessageMapper";
 import { CustomerMapper } from "../../../domain/mappers/CustomerMapper";
