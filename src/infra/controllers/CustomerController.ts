@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CurstomerService } from "../../aplication/CustomerService";
+import { CurstomerService } from "../../aplication/services/CustomerService";
 import { CustomerDTO } from "../../domain/dtos/CustomerDTO";
 
 export class CustomerController {
