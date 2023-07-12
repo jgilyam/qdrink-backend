@@ -9,5 +9,6 @@ const router = Router();
 
 
 router.post("/", drinkController.add);
+router.get("/", drinkController.findAll);
 
 export default router;

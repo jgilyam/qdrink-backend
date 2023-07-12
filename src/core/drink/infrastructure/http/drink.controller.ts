@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { DrinkService } from "../../application/drink.service";
 import { DrinkAddDTO } from '../../domain/dtos/drink.add.dto';
 import { DrinkOutDTO } from '../../domain/dtos/drink.out.dto';
+import { Page } from '../../../../common/page.response';
 
 export class DrinkController{
     constructor(private readonly drinkService: DrinkService){}
@@ -11,6 +12,17 @@ export class DrinkController{
         try {
             const drink = await this.drinkService.add(body);
             res.status(200).json(drink);
+            
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    findAll = async(req: Request<{},{},{},{}>, res: Response<Page<DrinkOutDTO>,{}>, next: NextFunction)=>{
+        try {
+            
+            const drinks = await this.drinkService.findAllDrinks();
+            res.status(200).json(drinks);
             
         } catch (error) {
             next(error);

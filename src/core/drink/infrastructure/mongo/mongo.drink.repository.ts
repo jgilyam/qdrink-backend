@@ -10,4 +10,9 @@ export class MongoDrinkRepository implements IDrinkRepository {
     });
     return await drinkEntity.save();
   };
+
+  findAll = async (): Promise<DrinkEntity[]> => {
+    return await Drink.find();
+  }
+  
 }
