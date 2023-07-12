@@ -8,11 +8,12 @@ import  drinkRouter from "../core/drink/infrastructure/http/drink.router"
 class Server {
   private app: Application;
   private port: string;
-  private apiPaths = apiPaths;
+  private apiPaths;
 
   constructor() {
     this.app = express();
     this.port = process.env.SERVER_PORT || "8000";
+    this.apiPaths =apiPaths;
 
     this.dbConnection();
     this.middlewares();
