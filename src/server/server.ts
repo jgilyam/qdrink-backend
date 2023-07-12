@@ -1,7 +1,5 @@
 import express, { Application } from "express";
-import clientRoutes from "./infra/routes/CustomerRoute";
 import cors from "cors";
-import { db } from "./infra/db/conecction";
 import { apiPaths } from "./api.routes";
 
 class Server {
@@ -18,14 +16,7 @@ class Server {
     this.routes();
   }
   async dbConnection() {
-    try {
-      await db.authenticate();
-      console.log("Connection with db has been established successfully.");
-      await db.sync({ alter: true });
-      console.log("All models were synchronized successfully.");
-    } catch (error) {
-      console.error("Unable to connect to the database:", error);
-    }
+
   }
 
   middlewares() {
@@ -35,7 +26,7 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.apiPaths.customers, clientRoutes);
+    //this.app.use(this.apiPaths.customers, clientRoutes);
   }
 
   listen() {

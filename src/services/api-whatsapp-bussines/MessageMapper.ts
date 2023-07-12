@@ -1,4 +1,4 @@
-import { CreateMessageDTO } from "../dtos/CreateMessageDTO";
+import { CreateMessageDTO } from "./dtos/CreateMessageDTO";
 
 export class MessageMapper {
   domainToDto(
