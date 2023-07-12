@@ -1,8 +1,8 @@
 import express, { Application } from "express";
-import clientRoutes from "../routes/CustomerRoute";
+import clientRoutes from "./infra/routes/CustomerRoute";
 import cors from "cors";
-import { db } from "../db/conecction";
-import { apiPaths } from "./apiPaths";
+import { db } from "./infra/db/conecction";
+import { apiPaths } from "./api.routes";
 
 class Server {
   private app: Application;
