@@ -3,6 +3,7 @@ import cors from "cors";
 
 import { apiPaths } from "./api.routes";
 import  drinkRouter from "../core/drink/infrastructure/http/drink.router"
+import { db } from "../db/connection";
 
 
 class Server {
@@ -20,7 +21,13 @@ class Server {
     this.routes();
   }
   async dbConnection() {
-
+    db.connect()
+      .then(() => {
+        console.log("Connection with db has been established successfully.");
+      })
+      .catch((error) => {
+        console.error("Unable to connect to the database:", error);
+      });
   }
 
   middlewares() {
