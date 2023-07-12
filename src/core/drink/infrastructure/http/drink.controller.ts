@@ -28,4 +28,17 @@ export class DrinkController{
             next(error);
         }
     }
+
+    edit = async(req: Request<{drinkId: string},{},DrinkAddDTO,{}>, res: Response<DrinkOutDTO,{}>, next: NextFunction)=>{
+        const { drinkId }= req.params
+        const { body }= req
+        try {
+
+            const drink = await this.drinkService.edit(drinkId, body);
+            res.status(200).json(drink);
+            
+        } catch (error) {
+            next(error);
+        }
+    }
 }

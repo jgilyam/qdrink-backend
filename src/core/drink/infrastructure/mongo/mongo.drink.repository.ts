@@ -15,4 +15,14 @@ export class MongoDrinkRepository implements IDrinkRepository {
     return await Drink.find();
   }
   
+  edit = async (id: string, drinkAddDTO: DrinkAddDTO): Promise<DrinkEntity | null> => {
+    await Drink.findByIdAndUpdate(id, {
+      ...drinkAddDTO,
+    });
+    return this.findById(id);
+  };
+
+  findById = async (id: string): Promise<DrinkEntity | null> => {
+    return await Drink.findById(id);
+  }
 }

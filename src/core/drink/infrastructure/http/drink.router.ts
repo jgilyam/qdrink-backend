@@ -6,9 +6,8 @@ import { DrinkOutDTO } from "../../domain/dtos/drink.out.dto";
 
 const router = Router();
 
-
-
 router.post("/", drinkController.add);
 router.get("/", drinkController.findAll);
+router.put("/:drinkId", drinkController.edit);
 
 export default router;

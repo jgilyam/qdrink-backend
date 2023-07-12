@@ -15,7 +15,7 @@ export class DrinkService {
     const drinkEntity = await this.drinkRepository.add(drinkAddDTO);
     return this.drinkMapper.drinkEntityToDrinkOutDTO(drinkEntity);
   };
-  
+
   findAllDrinks = async (): Promise<Page<DrinkOutDTO>> => {
     const drinks = await this.drinkRepository.findAll();
     const drinksOutDTO = drinks.map((drink) =>
@@ -23,4 +23,14 @@ export class DrinkService {
     );
     return new PageImpl(drinksOutDTO, drinksOutDTO.length);
   };
+
+  edit = async (id: string, drinkAddDTO: DrinkAddDTO): Promise<DrinkOutDTO> =>{
+    //const drinkToEdit = this.drinkRepository.findById(id);
+    console.log(id);
+    const drinkEdited = await this.drinkRepository.edit(id, drinkAddDTO);
+    
+    if(!drinkEdited) throw new Error("Drink Not found");
+    
+    return this.drinkMapper.drinkEntityToDrinkOutDTO(drinkEdited);
+  }
 }
