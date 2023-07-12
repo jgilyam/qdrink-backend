@@ -1,6 +1,9 @@
 import express, { Application } from "express";
 import cors from "cors";
+
 import { apiPaths } from "./api.routes";
+import  drinkRouter from "../core/drink/infrastructure/http/drink.router"
+
 
 class Server {
   private app: Application;
@@ -26,7 +29,7 @@ class Server {
   }
 
   routes() {
-    //this.app.use(this.apiPaths.customers, clientRoutes);
+    this.app.use(this.apiPaths.drinks, drinkRouter);
   }
 
   listen() {

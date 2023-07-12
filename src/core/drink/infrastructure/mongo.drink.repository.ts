@@ -1,6 +1,6 @@
-import { DrinkEntity } from "../../domain/drink.entity";
-import { IDrinkRepository } from "../../domain/drink.repository";
-import { DrinkAddDTO } from "../../domain/dtos/drink.add.dto";
+import { DrinkEntity } from "../domain/drink.entity";
+import { IDrinkRepository } from "../domain/drink.repository";
+import { DrinkAddDTO } from "../domain/dtos/drink.add.dto";
 
 export class MongoDrinkRepository implements IDrinkRepository{
     add = async (drinkAddDTO: DrinkAddDTO): Promise<DrinkEntity> => {

@@ -1,3 +1,3 @@
 export const apiPaths = {
-  customers: "/api/customers",
+  drinks: "/api/drinks",
 };
