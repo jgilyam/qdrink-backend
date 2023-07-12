@@ -4,6 +4,7 @@ import cors from "cors";
 import { apiPaths } from "./api.routes";
 import  drinkRouter from "../core/drink/infrastructure/http/drink.router"
 import { db } from "../db/connection";
+import errorMiddleware from "../middlewares/error.middleware";
 
 
 class Server {
@@ -19,6 +20,7 @@ class Server {
     this.dbConnection();
     this.middlewares();
     this.routes();
+    this.app.use(errorMiddleware);
   }
   async dbConnection() {
     db.connect()

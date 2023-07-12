@@ -8,7 +8,12 @@ export class DrinkController{
     constructor(private readonly drinkService: DrinkService){}
     add = async(req: Request<{},{},DrinkAddDTO,{}>, res: Response<DrinkOutDTO,{}>, next: NextFunction)=>{
         const { body }= req
-        const drink = await this.drinkService.add(body);
-        res.status(200).json(drink);
+        try {
+            const drink = await this.drinkService.add(body);
+            res.status(200).json(drink);
+            
+        } catch (error) {
+            next(error);
+        }
     }
 }
