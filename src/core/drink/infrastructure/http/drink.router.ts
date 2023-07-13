@@ -9,5 +9,6 @@ const router = Router();
 router.post("/", addValidatorRule(), validateFields, drinkController.add);
 router.get("/", drinkController.findAll);
 router.put("/:drinkId", editValidatorRule(), validateFields, drinkController.edit);
+router.delete("/:drinkId", editValidatorRule(), validateFields, drinkController.delete);
 
 export default router;

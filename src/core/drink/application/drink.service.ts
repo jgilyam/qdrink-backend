@@ -33,4 +33,11 @@ export class DrinkService {
     
     return this.drinkMapper.drinkEntityToDrinkOutDTO(drinkEdited);
   }
+
+  delete = async (id: string): Promise<DrinkOutDTO> =>{
+    const drink = await this.drinkRepository.deleteById(id);
+    
+    if(!drink) throw new Error("Drink Not found");
+    return this.drinkMapper.drinkEntityToDrinkOutDTO(drink);
+  }
 }

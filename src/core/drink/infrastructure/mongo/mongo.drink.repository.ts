@@ -25,4 +25,8 @@ export class MongoDrinkRepository implements IDrinkRepository {
   findById = async (id: string): Promise<DrinkEntity | null> => {
     return await Drink.findById(id);
   }
+
+  deleteById = async (id: string): Promise<DrinkEntity | null> => {
+    return await Drink.findByIdAndDelete(id);
+  }
 }

@@ -41,4 +41,17 @@ export class DrinkController{
             next(error);
         }
     }
+
+    delete = async(req: Request<{drinkId: string},{},{},{}>, res: Response<DrinkOutDTO,{}>, next: NextFunction)=>{
+        const { drinkId }= req.params
+        
+        try {
+
+            const drink = await this.drinkService.delete(drinkId);
+            res.status(200).json(drink);
+            
+        } catch (error) {
+            next(error);
+        }
+    }
 }
