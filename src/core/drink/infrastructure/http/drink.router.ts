@@ -1,13 +1,13 @@
 import { NextFunction, Router,Request, Response } from "express";
 
 import { drinkController } from "../../drink.dependencies";
-import { DrinkAddDTO } from "../../domain/dtos/drink.add.dto";
-import { DrinkOutDTO } from "../../domain/dtos/drink.out.dto";
+import { addValidatorRule, editValidatorRule } from "./drink.validator";
+import { validateFields } from "../../../../middlewares/validator.middleware";
 
 const router = Router();
 
-router.post("/", drinkController.add);
+router.post("/", addValidatorRule(), validateFields, drinkController.add);
 router.get("/", drinkController.findAll);
-router.put("/:drinkId", drinkController.edit);
+router.put("/:drinkId", editValidatorRule(), validateFields, drinkController.edit);
 
 export default router;
