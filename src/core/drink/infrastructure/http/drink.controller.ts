@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { DrinkService } from "../../application/drink.service";
 import { DrinkAddDTO, DrinkOutDTO } from '../../domain';
 import { Page } from '../../../../common/page.response';
+import { HttpCode } from '../../../../common/http.codes';
 
 export class DrinkController{
     constructor(private readonly drinkService: DrinkService){}
@@ -10,7 +11,7 @@ export class DrinkController{
         const { body }= req
         try {
             const drink = await this.drinkService.add(body);
-            res.status(200).json(drink);
+            res.status(HttpCode.CREATED).json(drink);
             
         } catch (error) {
             next(error);
@@ -21,7 +22,7 @@ export class DrinkController{
         try {
             
             const drinks = await this.drinkService.findAllDrinks();
-            res.status(200).json(drinks);
+            res.status(HttpCode.OK).json(drinks);
             
         } catch (error) {
             next(error);
@@ -34,7 +35,7 @@ export class DrinkController{
         try {
 
             const drink = await this.drinkService.edit(drinkId, body);
-            res.status(200).json(drink);
+            res.status(HttpCode.OK).json(drink);
             
         } catch (error) {
             next(error);
@@ -47,7 +48,7 @@ export class DrinkController{
         try {
 
             const drink = await this.drinkService.delete(drinkId);
-            res.status(200).json(drink);
+            res.status(HttpCode.OK).json(drink);
             
         } catch (error) {
             next(error);
