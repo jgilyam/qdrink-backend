@@ -28,7 +28,7 @@ export class DrinkService {
   };
 
   edit = async (id: string, drinkAddDTO: DrinkAddDTO): Promise<DrinkOutDTO | null> =>{
-    this.findDrinkEntityById(id);
+    await this.findDrinkEntityById(id);
     const drinkEdited = await this.drinkRepository.edit(id, drinkAddDTO);
     
     return this.drinkMapper.drinkEntityToDrinkOutDTO(drinkEdited);
