@@ -2,9 +2,10 @@ import express, { Application } from "express";
 import cors from "cors";
 
 import { apiPaths } from "./api.routes";
-import  drinkRouter from "../core/drink/infrastructure/http/drink.router"
 import { db } from "../db/connection";
 import errorMiddleware from "../middlewares/error.middleware";
+import drinkRouter from "../core/drink/infrastructure/http/drink.router"
+import messageRouter from "../core/messages/infrastructure/http/messager.router"
 
 
 class Server {
@@ -40,6 +41,7 @@ class Server {
 
   routes() {
     this.app.use(this.apiPaths.drinks, drinkRouter);
+    this.app.use(this.apiPaths.message, messageRouter);
   }
 
   listen() {
