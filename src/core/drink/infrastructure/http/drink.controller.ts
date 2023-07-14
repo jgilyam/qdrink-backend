@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { DrinkService } from "../../application/drink.service";
-import { DrinkAddDTO } from '../../domain/dtos/drink.add.dto';
-import { DrinkOutDTO } from '../../domain/dtos/drink.out.dto';
+import { DrinkAddDTO, DrinkOutDTO } from '../../domain';
 import { Page } from '../../../../common/page.response';
 
 export class DrinkController{

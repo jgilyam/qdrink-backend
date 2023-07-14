@@ -1,6 +1,4 @@
-import { DrinkEntity } from "../domain/drink.entity";
-import { IDrinkMapper } from "../domain/drink.mapper";
-import { DrinkOutDTO } from "../domain/dtos/drink.out.dto";
+import { DrinkEntity, IDrinkMapper, DrinkOutDTO } from "../domain";
 
 export class DrinkMapper implements IDrinkMapper{
     constructor(){}

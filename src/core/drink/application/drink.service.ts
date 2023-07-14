@@ -1,10 +1,5 @@
 import { Page, PageImpl } from "../../../common/page.response";
-import { DrinkEntity } from "../domain/drink.entity";
-import { IDrinkMapper } from "../domain/drink.mapper";
-import { IDrinkRepository } from "../domain/drink.repository";
-import { DrinkAddDTO } from "../domain/dtos/drink.add.dto";
-import { DrinkOutDTO } from "../domain/dtos/drink.out.dto";
-import { DrinkNotFoundException } from "../domain/errors/drink.notFound.exception";
+import { DrinkEntity,IDrinkMapper, IDrinkRepository, DrinkAddDTO, DrinkOutDTO, DrinkNotFoundException } from "../domain";
 
 export class DrinkService {
   constructor(

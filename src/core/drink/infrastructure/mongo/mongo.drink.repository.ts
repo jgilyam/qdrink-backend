@@ -1,6 +1,5 @@
 import { DrinkEntity } from "../../domain/drink.entity";
-import { IDrinkRepository } from "../../domain/drink.repository";
-import { DrinkAddDTO } from "../../domain/dtos/drink.add.dto";
+import { IDrinkRepository, DrinkAddDTO } from "../../domain";
 import { Drink } from "./mongo.drink.model";
 
 export class MongoDrinkRepository implements IDrinkRepository {

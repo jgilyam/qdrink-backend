@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { DrinkNotFoundException } from '../../domain/errors/drink.notFound.exception';
+import { DrinkNotFoundException } from '../../domain';
 import { ApiErrorResponse, ApiErrorResponseImpl } from '../../../../common/exception.response';
 import { HttpCode } from '../../../../common/http.codes';
 
