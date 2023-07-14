@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { DrinkEntity } from "../../domain/drink.entity";
+import { DrinkEntity } from "../../domain";
 
 const drinkSchema = new Schema<DrinkEntity>({
     name: { type: String, required: true },
