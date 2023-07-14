@@ -4,7 +4,8 @@ import { DrinkOutDTO } from "../domain/dtos/drink.out.dto";
 
 export class DrinkMapper implements IDrinkMapper{
     constructor(){}
-    drinkEntityToDrinkOutDTO(drinkEntity: DrinkEntity): DrinkOutDTO {
+    drinkEntityToDrinkOutDTO(drinkEntity: DrinkEntity | null): DrinkOutDTO | null {
+        if (!drinkEntity) return null;
         const {id, name, description, priceLiter, alcoholContent} = drinkEntity;
         const drinkOutDTO: DrinkOutDTO = {
             id,

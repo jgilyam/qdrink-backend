@@ -7,7 +7,7 @@ import { Page } from '../../../../common/page.response';
 
 export class DrinkController{
     constructor(private readonly drinkService: DrinkService){}
-    add = async(req: Request<{},{},DrinkAddDTO,{}>, res: Response<DrinkOutDTO,{}>, next: NextFunction)=>{
+    add = async(req: Request<{},{},DrinkAddDTO,{}>, res: Response<DrinkOutDTO | null,{}>, next: NextFunction)=>{
         const { body }= req
         try {
             const drink = await this.drinkService.add(body);
@@ -18,7 +18,7 @@ export class DrinkController{
         }
     }
 
-    findAll = async(req: Request<{},{},{},{}>, res: Response<Page<DrinkOutDTO>,{}>, next: NextFunction)=>{
+    findAll = async(req: Request<{},{},{},{}>, res: Response<Page<DrinkOutDTO | null>,{}>, next: NextFunction)=>{
         try {
             
             const drinks = await this.drinkService.findAllDrinks();
@@ -29,7 +29,7 @@ export class DrinkController{
         }
     }
 
-    edit = async(req: Request<{drinkId: string},{},DrinkAddDTO,{}>, res: Response<DrinkOutDTO,{}>, next: NextFunction)=>{
+    edit = async(req: Request<{drinkId: string},{},DrinkAddDTO,{}>, res: Response<DrinkOutDTO | null,{}>, next: NextFunction)=>{
         const { drinkId }= req.params
         const { body }= req
         try {
@@ -42,7 +42,7 @@ export class DrinkController{
         }
     }
 
-    delete = async(req: Request<{drinkId: string},{},{},{}>, res: Response<DrinkOutDTO,{}>, next: NextFunction)=>{
+    delete = async(req: Request<{drinkId: string},{},{},{}>, res: Response<DrinkOutDTO | null,{}>, next: NextFunction)=>{
         const { drinkId }= req.params
         
         try {
