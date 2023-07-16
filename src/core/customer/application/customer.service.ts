@@ -1,4 +1,4 @@
-import { ICustomerMapper, ICustomerRepository, CustomerOutDTO } from "../domain";
+import { ICustomerMapper, ICustomerRepository, CustomerOutDTO, CustomerInDTO } from "../domain";
 
 
 export class CustoemrService {
@@ -8,4 +8,10 @@ export class CustoemrService {
         const customer = await this.customerRepository.findByPhone(phone);
         return this.customerMapper.customerEntityToCustomerOutDTO(customer);
     }
+
+    add =async (customerInDTO:CustomerInDTO): Promise<CustomerOutDTO | null> => {
+        const customerEntity = await this.customerRepository.add(customerInDTO);
+        return this.customerMapper.customerEntityToCustomerOutDTO(customerEntity)
+    }
+
 }
