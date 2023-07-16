@@ -1,4 +1,4 @@
-export interface DrinkAddDTO {
+export interface DrinkInDTO {
     name: string;
     description: string;
     priceLiter: number;

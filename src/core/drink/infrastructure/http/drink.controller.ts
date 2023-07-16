@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { DrinkService } from "../../application/drink.service";
-import { DrinkAddDTO, DrinkOutDTO } from '../../domain';
+import { DrinkInDTO, DrinkOutDTO } from '../../domain';
 import { Page } from '../../../../common/page.response';
 import { HttpCode } from '../../../../common/http.codes';
 
 export class DrinkController{
     constructor(private readonly drinkService: DrinkService){}
-    add = async(req: Request<{},{},DrinkAddDTO,{}>, res: Response<DrinkOutDTO | null,{}>, next: NextFunction)=>{
+    add = async(req: Request<{},{},DrinkInDTO,{}>, res: Response<DrinkOutDTO | null,{}>, next: NextFunction)=>{
         const { body }= req
         try {
             const drink = await this.drinkService.add(body);
@@ -29,7 +29,7 @@ export class DrinkController{
         }
     }
 
-    edit = async(req: Request<{drinkId: string},{},DrinkAddDTO,{}>, res: Response<DrinkOutDTO | null,{}>, next: NextFunction)=>{
+    edit = async(req: Request<{drinkId: string},{},DrinkInDTO,{}>, res: Response<DrinkOutDTO | null,{}>, next: NextFunction)=>{
         const { drinkId }= req.params
         const { body }= req
         try {
