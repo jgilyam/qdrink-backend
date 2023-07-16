@@ -1,5 +1,5 @@
 import { Page, PageImpl } from "../../../common/page.response";
-import { DrinkEntity,IDrinkMapper, IDrinkRepository, DrinkAddDTO, DrinkOutDTO, DrinkNotFoundException } from "../domain";
+import { DrinkEntity,IDrinkMapper, IDrinkRepository, DrinkInDTO, DrinkOutDTO, DrinkNotFoundException } from "../domain";
 
 export class DrinkService {
   constructor(
@@ -7,7 +7,7 @@ export class DrinkService {
     private drinkMapper: IDrinkMapper
   ) {}
 
-  add = async (drinkAddDTO: DrinkAddDTO): Promise<DrinkOutDTO | null> => {
+  add = async (drinkAddDTO: DrinkInDTO): Promise<DrinkOutDTO | null> => {
     const drinkEntity = await this.drinkRepository.add(drinkAddDTO);
     
     return this.drinkMapper.drinkEntityToDrinkOutDTO(drinkEntity);
@@ -22,7 +22,7 @@ export class DrinkService {
     return new PageImpl(drinksOutDTO, drinksOutDTO.length);
   };
 
-  edit = async (id: string, drinkAddDTO: DrinkAddDTO): Promise<DrinkOutDTO | null> =>{
+  edit = async (id: string, drinkAddDTO: DrinkInDTO): Promise<DrinkOutDTO | null> =>{
     await this.findDrinkEntityById(id);
     const drinkEdited = await this.drinkRepository.edit(id, drinkAddDTO);
     

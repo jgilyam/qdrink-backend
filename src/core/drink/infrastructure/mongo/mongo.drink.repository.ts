@@ -1,9 +1,9 @@
 import { DrinkEntity } from "../../domain/drink.entity";
-import { IDrinkRepository, DrinkAddDTO } from "../../domain";
+import { IDrinkRepository, DrinkInDTO } from "../../domain";
 import { Drink } from "./mongo.drink.model";
 
 export class MongoDrinkRepository implements IDrinkRepository {
-  add = async (drinkAddDTO: DrinkAddDTO): Promise<DrinkEntity> => {
+  add = async (drinkAddDTO: DrinkInDTO): Promise<DrinkEntity> => {
     const drinkEntity = new Drink({
       ...drinkAddDTO,
     });
@@ -14,7 +14,7 @@ export class MongoDrinkRepository implements IDrinkRepository {
     return await Drink.find();
   }
   
-  edit = async (id: string, drinkAddDTO: DrinkAddDTO): Promise<DrinkEntity | null> => {
+  edit = async (id: string, drinkAddDTO: DrinkInDTO): Promise<DrinkEntity | null> => {
     await Drink.findByIdAndUpdate(id, {
       ...drinkAddDTO,
     });
