@@ -10,7 +10,8 @@ export class CustoemrService {
     }
 
     add =async (customerInDTO:CustomerInDTO): Promise<CustomerOutDTO | null> => {
-        const customerEntity = await this.customerRepository.add(customerInDTO);
+        let customerEntity = this.customerMapper.customerInDTOToCustomerEntity(customerInDTO);
+        customerEntity = {...await this.customerRepository.save(customerEntity)}
         return this.customerMapper.customerEntityToCustomerOutDTO(customerEntity)
     }
 

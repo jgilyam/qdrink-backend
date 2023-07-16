@@ -8,14 +8,23 @@ export class MongoCustomerRepository implements ICustomerRepository{
         })
         return await customerEntity.save();
     }
+    
     findAll(): Promise<CustomerEntity[]> {
         throw new Error("Method not implemented.");
     }
+    
     edit(id: string, customerInDTO: CustomerInDTO): Promise<CustomerEntity | null> {
         throw new Error("Method not implemented.");
     }
+    
     findByPhone = async (phone: string): Promise<CustomerEntity | null>=>{
         return await Customer.findOne({phone});
-        
+    }
+
+    save = async(customerEntity: CustomerEntity): Promise<CustomerEntity> => {
+        const newCustomer = new Customer({
+            ...customerEntity
+        })
+        return await newCustomer.save();
     }
 }

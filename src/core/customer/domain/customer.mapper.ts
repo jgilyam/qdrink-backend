@@ -1,6 +1,6 @@
-import { CustomerEntity } from "./customer.entity";
-import { CustomerOutDTO } from "./dtos/customer.out.dto";
+import { CustomerEntity, CustomerInDTO, CustomerOutDTO } from "./";
 
 export interface ICustomerMapper{
-    customerEntityToCustomerOutDTO(customerEntity: CustomerEntity | null): CustomerOutDTO | null
+    customerEntityToCustomerOutDTO(customerEntity: CustomerEntity | null): CustomerOutDTO | null;
+    customerInDTOToCustomerEntity(customerInDTO: CustomerInDTO): CustomerEntity;
 }
