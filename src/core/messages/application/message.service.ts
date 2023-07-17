@@ -3,30 +3,17 @@ import { NewCostumerHandlerCreator } from "./message-handler/new.customer.handle
 import { LoadCreditHandlerCreator } from "./message-handler/load.credit.handler";
 import { Creator } from "./message-handler/message.handler.creator";
 import { RequestQrCodeHandlerCreator } from "./message-handler/request.qrcode.handler";
-
-
-
-const choseHandler = (text: string, phone: string) => {
-  switch (text) {
-    case "qr":
-      return new RequestQrCodeHandlerCreator();
-    case "saldo":
-      return new LoadCreditHandlerCreator();
-    case "new":
-      return new NewCostumerHandlerCreator();
-    default:
-      return new LoadCreditHandlerCreator();
-  }
-};
+import { CustomerService } from "../../customer/application/customer.service";
+import { IMessager } from "../domain/dtos/message.messager";
 
 
 export class MessageService {
-    constructor() {}
+    constructor(private readonly customerService: CustomerService, private readonly messager: IMessager) {}
   
     receiver = async (body: MessageinDTO)=>{
         const { text, phone } = body;
         
-        const response = choseHandler(text, phone);
+        const response = this.choseHandler(text, phone);
         
         const res = response.run()
     
@@ -34,4 +21,21 @@ export class MessageService {
     
       
     };
+
+    private choseHandler = (text: string, phone: string) => {
+      
+      const customer = this.customerService.findByPhone(phone);
+      
+      if(!customer) 
+        return new NewCostumerHandlerCreator(this.customerService, phone);
+      
+        switch (text) {
+        case "qr":
+          return new RequestQrCodeHandlerCreator();
+        case "saldo":
+          return new LoadCreditHandlerCreator();
+        default:
+          return new LoadCreditHandlerCreator();
+      }
+    }
 }

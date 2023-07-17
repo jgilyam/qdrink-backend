@@ -1,7 +1,7 @@
 import { ICustomerMapper, ICustomerRepository, CustomerOutDTO, CustomerInDTO } from "../domain";
 
 
-export class CustoemrService {
+export class CustomerService {
     constructor(private readonly customerRepository: ICustomerRepository, private readonly customerMapper: ICustomerMapper){}
 
     findByPhone = async(phone: string) : Promise<CustomerOutDTO | null>=>{
