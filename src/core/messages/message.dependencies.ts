@@ -2,11 +2,10 @@ import { MessageService } from "./application/message.service";
 import { MessageController } from "./infrastructure/http/message.controller";
 import { MockMessager } from "./infrastructure/mock-messager/mock.messager";
 
-import { WhatsappWebMessager, whatsappWebClient } from "./infrastructure/whatsapp-web-js/whatsapp.web.messager";
+import { WhatsappWebMessager } from "./infrastructure/whatsapp-web-js/whatsapp.web.messager";
 import { WhatsappWebController } from "./infrastructure/whatsapp-web-js/whatsapp.controller";
 import { customerService } from "../customer/dependencies";
-
-
+import { whatsappWebClient } from "./infrastructure/whatsapp-web-js/connectionWclient"
 
 const apiWhatsappEnabled: boolean  = JSON.parse(process.env.API_WHATSAPP_BUSSINES_ENABLED || "false");
 
