@@ -16,3 +16,4 @@ const init = async ()=>{
         await whatsappWebClient.initialize();
     }
 }
+init();
