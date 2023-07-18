@@ -11,6 +11,7 @@ export class MessageService {
   
     receiver = async (body: MessageinDTO)=>{
         const { text, phone } = body;
+        console.log(body);
         
         const response = await this.choseHandler(text, phone);
         
@@ -31,10 +32,17 @@ export class MessageService {
       if(!customer) 
         return new NewCostumerHandlerCreator(this.customerService, this.messager, phone);
       
+      const amountToCharge = parseFloat(text);
+      
+      if(!Number.isNaN(amountToCharge))
+        return new LoadCreditHandlerCreator();
+
         switch (text) {
         case "qr":
+          console.log("qr")
           return new RequestQrCodeHandlerCreator();
         case "saldo":
+          console.log("saldo")
           return new LoadCreditHandlerCreator();
         default:
           return new LoadCreditHandlerCreator();
