@@ -15,7 +15,7 @@ export class MessageService {
         
         const response = await this.choseHandler(text, phone);
         
-        const res = response.run()
+        const res = await response.run()
     
         console.log(res);
     

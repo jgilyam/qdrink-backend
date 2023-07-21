@@ -9,7 +9,7 @@ export class LoadCreditHandlerCreator extends Creator {
 }
 
 class LoadCreditHandler implements MessageHandler {
-    execute(): void {
+    async execute(): Promise<void> {
         console.log("aca se ejecuta la logica de negocio cuando el cliente quiere cargar credito en su cuenta")
     }
     reply(): string {
