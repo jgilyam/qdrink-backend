@@ -4,10 +4,10 @@ export abstract class Creator {
 
     public abstract createMessageHandler(): MessageHandler;
 
-    public run(): string {
+    public async run(): Promise<string> {
     
         const product = this.createMessageHandler();
-        product.execute();
+        await product.execute();
 
         return product.reply();
     }

@@ -4,7 +4,7 @@ import { DrinkEntity,IDrinkMapper, IDrinkRepository, DrinkInDTO, DrinkOutDTO, Dr
 export class DrinkService {
   constructor(
     private readonly drinkRepository: IDrinkRepository,
-    private drinkMapper: IDrinkMapper
+    private readonly drinkMapper: IDrinkMapper
   ) {}
 
   add = async (drinkAddDTO: DrinkInDTO): Promise<DrinkOutDTO | null> => {

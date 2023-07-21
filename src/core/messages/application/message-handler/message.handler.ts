@@ -1,4 +1,4 @@
 export interface MessageHandler {
-    execute(): void;
+    execute(): Promise<void>;
     reply(): string;
 }

@@ -9,7 +9,7 @@ export class RequestQrCodeHandlerCreator extends Creator {
 }
 
 class RequestQrCodeHandler implements MessageHandler {
-    execute(): void {
+    async execute(): Promise<void>{
         console.log("aca se ejecuta la logica de negocio cuando el cliente solicita su QR")
     }
     reply(): string {
