@@ -4,10 +4,11 @@ import { LoadCreditHandlerCreator } from "./message-handler/load.credit.handler"
 import { RequestQrCodeHandlerCreator } from "./message-handler/request.qrcode.handler";
 import { CustomerService } from "../../customer/application/customer.service";
 import { IMessager } from "../domain/dtos/message.messager";
+import { PaymentService } from "../../payment/application/payment.service";
 
 
 export class MessageService {
-    constructor(private readonly customerService: CustomerService, private readonly messager: IMessager) {}
+    constructor(private readonly customerService: CustomerService, private readonly messager: IMessager, private readonly paymentService: PaymentService) {}
   
     receiver = async (body: MessageinDTO)=>{
         const { text, phone } = body;
@@ -35,7 +36,7 @@ export class MessageService {
       const amountToCharge = parseFloat(text);
       
       if(!Number.isNaN(amountToCharge))
-        return new LoadCreditHandlerCreator();
+        return new LoadCreditHandlerCreator(this.messager, this.paymentService, amountToCharge, customer, phone);
 
         switch (text) {
         case "qr":
@@ -43,9 +44,9 @@ export class MessageService {
           return new RequestQrCodeHandlerCreator();
         case "saldo":
           console.log("saldo")
-          return new LoadCreditHandlerCreator();
+          return new RequestQrCodeHandlerCreator();
         default:
-          return new LoadCreditHandlerCreator();
+          return new RequestQrCodeHandlerCreator();
       }
     }
 }
