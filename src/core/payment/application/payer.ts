@@ -1,14 +1,14 @@
 import { PaymentRequestAddDto } from "../domain/dtos/payment.request.add.dto";
-import { PaymentStrategy } from "../domain/payment.strategy";
+import { IPaymentStrategy } from "../domain/payment.strategy";
 
 export class Payer{
-    private paymentStrategy: PaymentStrategy;
+    private paymentStrategy: IPaymentStrategy;
     
-    constructor(paymentStrategy: PaymentStrategy){
+    constructor(paymentStrategy: IPaymentStrategy){
         this.paymentStrategy = paymentStrategy;
     }
     
-    setPaymentStrategy = (paymentStrategy: PaymentStrategy)=>{
+    setPaymentStrategy = (paymentStrategy: IPaymentStrategy)=>{
         this.paymentStrategy = paymentStrategy;
     }
 
