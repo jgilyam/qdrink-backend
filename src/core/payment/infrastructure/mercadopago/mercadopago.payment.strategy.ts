@@ -1,29 +1,29 @@
 import { CreatePreferencePayload, PreferenceItem } from "mercadopago/models/preferences/create-payload.model";
-import { PaymentRequestAddDto } from "../../domain/dtos/payment.request.add.dto";
-import { IPaymentStrategy } from "../../domain/payment.strategy";
 import {mercadopago} from "./mercadopago.config";
+import { PaymentAddDTO, IPaymentStrategy } from "../../domain";
+import { config } from "../../../../config/config";
 
 
 export class MercadoPagoPaymentStrategy implements IPaymentStrategy{
-    createPaymentRequest = async(paymentRequest: PaymentRequestAddDto, userId: string): Promise<string> => {
-        const {title, quantity, currency_id, unit_price} = paymentRequest
+    createPaymentRequest = async(paymentRequest: PaymentAddDTO, paymentId: string, phone: string): Promise<string> => {
+        const { amount } = paymentRequest
         
         const preferenceItem: PreferenceItem = {
-            title,
-            quantity,
+            title: `Qdrink - Recarga usuario: ${phone}`,
+            quantity: 1,
             currency_id: 'ARS',
-            unit_price
+            unit_price: amount
         }
         const payload : CreatePreferencePayload = {
             items:[preferenceItem],
-            notification_url: `https://756b-190-176-67-100.ngrok-free.app/api/payments/webHook/${userId}`
+            notification_url: `${config.host}/api/payments/${paymentId}/notifications`
         }
          const response = await mercadopago.preferences.create(payload)
          console.log(`Respuesta from mercadopago
          ----------------------
          ${JSON.stringify(response, undefined, 2)}
          ----------------------`)
-        return response.body.init_point;
+        return response.body.init_point as string;
     }
 
 }

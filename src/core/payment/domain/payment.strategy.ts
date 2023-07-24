@@ -1,5 +1,7 @@
-import { PaymentRequestAddDto } from "./dtos/payment.request.add.dto";
+import { ExternalServiceData } from ".";
+import { PaymentAddDTO } from "./dtos";
 
 export interface IPaymentStrategy{
-    createPaymentRequest(paymentRequest: PaymentRequestAddDto, userId: string): Promise<string>;
+    createPaymentRequest(paymentRequest: PaymentAddDTO, userId: string, phone: string): Promise<string>;
+    findPaymentsDetailById(externalPaymentId: string): Promise<ExternalServiceData>
 }

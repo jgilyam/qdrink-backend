@@ -4,7 +4,7 @@ import { paymentController } from "./../../payment.dependencies"
 
 const router = Router();
 
-router.post("/webHook/:userId", paymentController.add);
+router.post("/:paymentId/notifications", paymentController.updatePaymentStatus);
 
 
 export default router;
