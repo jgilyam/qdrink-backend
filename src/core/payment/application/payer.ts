@@ -19,4 +19,7 @@ export class Payer{
     findPaymentDetails = async (externalPaymentId: string) =>{
         return this.paymentStrategy.findPaymentsDetailById(externalPaymentId);
     }
+    convertStatus = (externalPaymentStatus: string) =>{
+        return this.paymentStrategy.convertPaymentStatus(externalPaymentStatus);
+    }
 }
