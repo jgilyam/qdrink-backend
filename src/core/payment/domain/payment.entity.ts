@@ -1,16 +1,21 @@
 import { CustomerEntity } from "../../customer/domain";
 
 export interface PaymentEntity{
-    id?: string;
-    idFromPaymentService: string;
-    paymentStatus: string;
-    amount: string;
+    id: string;
+    paymentStatus: PaymentStatus;
+    amount: number;
     customer: CustomerEntity;
-    //
-    client_id: string;
-    collector_id: number;
-    date_created: string;
-    init_point: string;
-    operation_type: string;
-    
+    externalServiceData?: ExternalServiceData;    
+}
+export interface ExternalServiceData{
+    idFromPaymentService: string;
+    clientIdd: string;
+    collectorId: number;
+    dateCreated: string;
+    initPoint: string;
+    operationType: string;
+}
+
+export enum PaymentStatus{
+    APPROVED, PENDING, REJECTED
 }

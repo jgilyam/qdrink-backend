@@ -1,4 +1,4 @@
-import { PaymentRequestAddDto } from "../domain/dtos/payment.request.add.dto";
+import { PaymentAddDTO } from "../domain/dtos";
 import { IPaymentStrategy } from "../domain/payment.strategy";
 
 export class Payer{
@@ -12,7 +12,7 @@ export class Payer{
         this.paymentStrategy = paymentStrategy;
     }
 
-    generatePaymentRequqest = (paymentRequest: PaymentRequestAddDto, userId: string) => {
-        return this.paymentStrategy.createPaymentRequest(paymentRequest, userId);
+    generatePaymentRequest = (paymentRequest: PaymentAddDTO, paymentId: string, phone: string) => {
+        return this.paymentStrategy.createPaymentRequest(paymentRequest, paymentId, phone);
     }
 }
