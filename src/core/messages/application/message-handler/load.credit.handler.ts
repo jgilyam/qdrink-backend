@@ -35,7 +35,7 @@ class LoadCreditHandler implements MessageHandler {
     }
 
     async execute(): Promise<void> {
-        await this.paymentService.addNewPayment(this.amountToCharge, this.customer, this.phone)
+        const urlToPay = await this.paymentService.addNewPayment(this.amountToCharge, this.customer, this.phone)
     }
     reply(): string {
         return "Te dejamos el siguiente link para que puedas cargar en tu cuenta los 500 pesos que solicitaste ";
