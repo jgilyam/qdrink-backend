@@ -8,14 +8,17 @@ export interface PaymentEntity{
     externalServiceData?: ExternalServiceData;    
 }
 export interface ExternalServiceData{
-    idFromPaymentService: string;
-    clientIdd: string;
-    collectorId: number;
-    dateCreated: string;
-    initPoint: string;
-    operationType: string;
+    allExternalData: any;
+    utilExternalData: UtilExternalData
+}
+export interface UtilExternalData {
+    transactionAmount: number,
+    status: string,
+    statusDetail: string,
+    externalId: string,    
 }
 
+
 export enum PaymentStatus{
-    APPROVED, PENDING, REJECTED
+    APPROVED, PENDING, REJECTED, CANCELLED
 }
