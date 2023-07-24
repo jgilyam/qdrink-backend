@@ -1,11 +1,10 @@
-import { Payer } from "./application/payer";
-import { PaymentService } from "./application/payment.service";
-import { PaymentController } from "./infrastructure/http/payment.controller";
-import { MercadoPagoPaymentStrategy } from "./infrastructure/mercadopago/mercadopago.payment.strategy";
-
+import { Payer, PaymentService } from "./application";
+import { PaymentController, MercadoPagoPaymentStrategy, MongoPaymentRepository } from "./infrastructure/";
 
 const mercadoPagoPaymentStrategy = new MercadoPagoPaymentStrategy();
 const payer = new Payer(mercadoPagoPaymentStrategy);
 
-export const paymentService = new PaymentService(payer);
-export const paymentController = new PaymentController();
+const paymentRepositorty = new MongoPaymentRepository();
+
+export const paymentService = new PaymentService(payer, paymentRepositorty);
+export const paymentController = new PaymentController(paymentService);

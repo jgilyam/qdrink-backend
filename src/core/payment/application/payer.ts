@@ -12,7 +12,11 @@ export class Payer{
         this.paymentStrategy = paymentStrategy;
     }
 
-    generatePaymentRequest = (paymentRequest: PaymentAddDTO, paymentId: string, phone: string) => {
+    generatePaymentRequest = async (paymentRequest: PaymentAddDTO, paymentId: string, phone: string) => {
         return this.paymentStrategy.createPaymentRequest(paymentRequest, paymentId, phone);
+    }
+
+    findPaymentDetails = async (externalPaymentId: string) =>{
+        return this.paymentStrategy.findPaymentsDetailById(externalPaymentId);
     }
 }

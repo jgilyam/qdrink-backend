@@ -1,10 +1,13 @@
 import { CreatePreferencePayload, PreferenceItem } from "mercadopago/models/preferences/create-payload.model";
 import {mercadopago} from "./mercadopago.config";
-import { PaymentAddDTO, IPaymentStrategy } from "../../domain";
+import { PaymentAddDTO, IPaymentStrategy, ExternalServiceData } from "../../domain";
 import { config } from "../../../../config/config";
 
 
 export class MercadoPagoPaymentStrategy implements IPaymentStrategy{
+    findPaymentsDetailById = async (externalPaymentId: string): Promise<ExternalServiceData> => {
+        throw new Error("Method not implemented.");
+    }
     createPaymentRequest = async(paymentRequest: PaymentAddDTO, paymentId: string, phone: string): Promise<string> => {
         const { amount } = paymentRequest
         

@@ -2,15 +2,16 @@ import { NextFunction, Request, Response } from "express";
 import { HttpCode } from "../../../../common/http.codes";
 import { MerchantOrderDTO } from "../mercadopago/domain/dtos/merchant.order.dto";
 import { PaymentCreatedDTO } from "../mercadopago/domain/dtos/payment.created.dto";
+import { PaymentService } from "../../application";
 
 export class PaymentController{
-    constructor(){
+    constructor(private readonly paymentService: PaymentService){
 
     }
 
     updatePaymentStatus = async(req: Request<{paymentId: string},{},PaymentCreatedDTO,{}>, res: Response<{},{}>, next: NextFunction)=>{
         const { body, query, params }= req
-        const {paymentId} = params;
+        const { paymentId } = params;
       
         try {
             console.log(`Ejecuccion de webhook:
@@ -23,7 +24,8 @@ export class PaymentController{
             res.sendStatus(HttpCode.OK);
             if(body.type ==='payment'){
                 console.log("Updating payment");
-                pay
+                const{ id: externalPaymentId } = body.data
+                await this.paymentService.updatePaymentStatus(paymentId, externalPaymentId);
             }
 
             

@@ -22,7 +22,8 @@ export class PaymentService{
         return this.payer.generatePaymentRequest(paymentAdd, newPayment.id, phone);
     }
     
-    updatePaymentStatus = async()=>{
+    updatePaymentStatus = async(ownPaymentId: string, externalPaymentId: string)=>{
+        const externalData = await this.payer.findPaymentDetails(externalPaymentId);
         
     }
 }
