@@ -1,5 +1,5 @@
 import { CustomerOutDTO } from "../../customer/domain";
-import { IPaymentRepository, PaymentAddDTO, PaymentRequestAddDto, PaymentStatus } from "../domain";
+import { IPaymentRepository, PaymentAddDTO, PaymentEntity, PaymentRequestAddDto, PaymentStatus } from "../domain";
 import { Payer } from "./";
 
 export class PaymentService{
@@ -24,6 +24,26 @@ export class PaymentService{
     
     updatePaymentStatus = async(ownPaymentId: string, externalPaymentId: string)=>{
         const externalData = await this.payer.findPaymentDetails(externalPaymentId);
+        const { utilExternalData } = externalData
+        const paymentEntity = await this.findPaymentEntityById(ownPaymentId);
+        paymentEntity.externalServiceData = externalData;
+        paymentEntity.amount = utilExternalData.transactionAmount;
         
+        const paymentStatus = this.payer.convertStatus(utilExternalData.status);
+        paymentEntity.paymentStatus = paymentStatus;
+        await this.paymentRepositorty.update(paymentEntity);
+        if (paymentStatus === PaymentStatus.APPROVED){
+            // TODO: generar un movimiento...el movimeinto debe actualizar el saldo
+            console.log('generar un movimiento...el movimeinto debe actualizar el saldo')
+            console.log(JSON.stringify(paymentEntity, undefined, 2))
+        }
+
     }
+
+    private findPaymentEntityById = async (paymentId: string): Promise<PaymentEntity> =>{
+        const paymentEntity = await this.paymentRepositorty.findById(paymentId);
+        if(!paymentEntity) throw new Error();
+        
+        return paymentEntity;
+      }
 }
