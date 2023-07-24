@@ -12,7 +12,7 @@ export class Payer{
         this.paymentStrategy = paymentStrategy;
     }
 
-    generatePaymentRequqest = (paymentRequest: PaymentRequestAddDto) => {
-        return this.paymentStrategy.createPaymentRequest(paymentRequest);
+    generatePaymentRequqest = (paymentRequest: PaymentRequestAddDto, userId: string) => {
+        return this.paymentStrategy.createPaymentRequest(paymentRequest, userId);
     }
 }
