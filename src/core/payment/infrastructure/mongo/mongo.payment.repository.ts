@@ -1,5 +1,5 @@
 import { IPaymentRepository, PaymentAddDTO, PaymentEntity } from "../../domain";
-import { Payment } from "./";
+import { Payment } from "./mongo.payment.model";
 
 export class MongoPaymentRepository implements IPaymentRepository{
     findById = async (id: string): Promise<PaymentEntity | null> => {
@@ -11,9 +11,11 @@ export class MongoPaymentRepository implements IPaymentRepository{
     }
     add = async (paymentAddDTO: PaymentAddDTO): Promise<PaymentEntity | null> => {
         const paymentEntity = new Payment({
+            customer: paymentAddDTO.customerId,
             ...paymentAddDTO,
           });
-          return await paymentEntity.save();
+          
+          return await paymentEntity.save(); 
     }
     edit(id: string, paymentAddDTO: PaymentAddDTO): Promise<PaymentEntity | null> {
         throw new Error("Method not implemented.");
