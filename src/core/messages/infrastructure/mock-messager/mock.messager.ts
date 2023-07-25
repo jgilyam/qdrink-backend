@@ -7,6 +7,7 @@ export class MockMessager implements IMessager{
     }
     sendMessageAndImage = async (phone: string, text: string, image: string): Promise<void> => {
         console.log("Executing sendMessageAndImage of mock messager");
-        console.log(JSON.stringify({phone, text, image}, undefined, 2));
+        console.log(`Esto es un qr: ${image.slice(20)}`)
+        console.log(JSON.stringify({phone, text}, undefined, 2));
     }
 }
