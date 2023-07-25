@@ -27,17 +27,23 @@ class LoadCreditHandler implements MessageHandler {
     private amountToCharge: number; 
     private customer: CustomerOutDTO;
     private phone: string;
+    private response: string;
 
     constructor(private readonly messager: IMessager, private readonly paymentService: PaymentService, amountToCharge: number, customer: CustomerOutDTO, phone: string){
         this.amountToCharge = amountToCharge;
         this.customer = customer;
         this.phone = phone;
+        this.response = "";
+        
     }
 
     async execute(): Promise<void> {
-        const urlToPay = await this.paymentService.addNewPayment(this.amountToCharge, this.customer, this.phone)
+        console.log('execute')
+        this.response = await this.paymentService.addNewPayment(this.amountToCharge, this.customer, this.phone)
+        console.log(JSON.stringify(this.response, undefined, 2))
     }
     reply(): string {
-        return "Te dejamos el siguiente link para que puedas cargar en tu cuenta los 500 pesos que solicitaste ";
+        this.messager.sendMessage(this.phone, this.response)
+        return `Te dejamos el siguiente link para que puedas cargar en tu cuenta los 500 pesos que solicitaste ${this.response} `;
     }
 }
