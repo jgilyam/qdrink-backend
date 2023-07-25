@@ -14,15 +14,9 @@ export class MessageService {
   
     receiver = async (body: MessageinDTO)=>{
         const { text, phone } = body;
-        console.log(body);
-        
+    
         const response = await this.choseHandler(text, phone);
-        
-        const res = await response.run()
-    
-        console.log(res);
-    
-      
+        await response.run()
     };
 
     private choseHandler = async (text: string, phone: string) => {
