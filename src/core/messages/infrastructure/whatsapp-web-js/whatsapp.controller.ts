@@ -5,7 +5,6 @@ import { MessageinDTO } from "../../domain/dtos/message.in.dto";
 
 export class WhatsappWebController{
     constructor(private readonly messageService: MessageService){
-        console.log('WhatsappWebController instancia creada')
     }
     generateQr = (qr: string) => {
         console.log('generateQr');

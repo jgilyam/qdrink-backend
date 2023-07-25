@@ -6,6 +6,7 @@ import { WhatsappWebMessager } from "./infrastructure/whatsapp-web-js/whatsapp.w
 import { WhatsappWebController } from "./infrastructure/whatsapp-web-js/whatsapp.controller";
 import { customerService } from "../customer/dependencies";
 import { whatsappWebClient } from "./infrastructure/whatsapp-web-js/connectionWclient"
+import { paymentService } from "../payment/payment.dependencies";
 
 const apiWhatsappEnabled: boolean  = JSON.parse(process.env.API_WHATSAPP_BUSSINES_ENABLED || "false");
 
@@ -18,7 +19,8 @@ const chooseMessager = ()=>{
 }
 const messager = chooseMessager(); 
 
-export const messageService = new MessageService(customerService, messager);
+
+export const messageService = new MessageService(customerService, messager, paymentService);
 export const messageController = new MessageController(messageService);
 export const whatsappWebController = new WhatsappWebController(messageService);
 

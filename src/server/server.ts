@@ -6,6 +6,7 @@ import { db } from "../db/connection";
 import errorMiddleware from "../middlewares/error.middleware";
 import drinkRouter from "../core/drink/infrastructure/http/drink.router"
 import messageRouter from "../core/messages/infrastructure/http/messager.router"
+import paymentRouter from "../core/payment/infrastructure/http/payment.router"
 
 
 class Server {
@@ -42,6 +43,7 @@ class Server {
   routes() {
     this.app.use(this.apiPaths.drinks, drinkRouter);
     this.app.use(this.apiPaths.message, messageRouter);
+    this.app.use(this.apiPaths.payments, paymentRouter);
   }
 
   listen() {
