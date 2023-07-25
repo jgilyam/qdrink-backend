@@ -5,6 +5,8 @@ import { RequestQrCodeHandlerCreator } from "./message-handler/request.qrcode.ha
 import { CustomerService } from "../../customer/application/customer.service";
 import { IMessager } from "../domain/dtos/message.messager";
 import { PaymentService } from "../../payment/application/payment.service";
+import { BalanceRequestHandlerCreator } from "./message-handler/balance.request.handler";
+import { DefaultRequestHandlerCreator } from "./message-handler/default.request.handler";
 
 
 export class MessageService {
@@ -26,10 +28,7 @@ export class MessageService {
     private choseHandler = async (text: string, phone: string) => {
       
       const customer = await this.customerService.findByPhone(phone);
-      console.log({
-        customer,
-        phone
-      })
+
       if(!customer) 
         return new NewCostumerHandlerCreator(this.customerService, this.messager, phone);
       
@@ -40,13 +39,11 @@ export class MessageService {
 
         switch (text) {
         case "qr":
-          console.log("qr")
-          return new RequestQrCodeHandlerCreator();
+          return new RequestQrCodeHandlerCreator(this.messager, customer, phone);
         case "saldo":
-          console.log("saldo")
-          return new RequestQrCodeHandlerCreator();
+          return new BalanceRequestHandlerCreator(this.messager, customer, phone);
         default:
-          return new RequestQrCodeHandlerCreator();
+          return new DefaultRequestHandlerCreator(this. messager, phone);
       }
     }
 }
