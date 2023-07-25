@@ -14,7 +14,6 @@ export class Payer{
     }
 
     generatePaymentRequest = async (paymentRequest: PaymentAddDTO, paymentId: string, phone: string) => {
-        console.log('generatePaymentRequest')
         return this.paymentStrategy.createPaymentRequest(paymentRequest, paymentId, phone);
     }
 
