@@ -1,11 +1,11 @@
 import { CustomerOutDTO } from "../../customer/domain";
-import { IPaymentRepository, PaymentAddDTO, PaymentEntity, PaymentRequestAddDto, PaymentStatus } from "../domain";
-import { Payer } from "./";
+import { IPaymentRepository, PaymentAddDTO, PaymentEntity, PaymentStatus } from "../domain";
+import { Payer } from "./payer";
 
 export class PaymentService{
-    private  payer :Payer;
-    constructor(payer :Payer, private readonly paymentRepositorty: IPaymentRepository){
-        this.payer = payer;
+    private payer :Payer;
+    constructor(private readonly paymentRepositorty: IPaymentRepository){
+     this.payer = new Payer();
     }
     addNewPayment = async(amount: number, customer: CustomerOutDTO, phone: string): Promise<string>=>{
         const {id: customerId} =  customer;
@@ -17,21 +17,23 @@ export class PaymentService{
             customerId
         }
         const newPayment = await this.paymentRepositorty.add(paymentAdd);
-        if (!newPayment) throw new Error();
         
-        return this.payer.generatePaymentRequest(paymentAdd, newPayment.id, phone);
+        if (!newPayment) throw new Error();
+        return await this.payer.generatePaymentRequest(paymentAdd, newPayment.id, phone);
     }
     
     updatePaymentStatus = async(ownPaymentId: string, externalPaymentId: string)=>{
         const externalData = await this.payer.findPaymentDetails(externalPaymentId);
         const { utilExternalData } = externalData
         const paymentEntity = await this.findPaymentEntityById(ownPaymentId);
-        paymentEntity.externalServiceData = externalData;
-        paymentEntity.amount = utilExternalData.transactionAmount;
         
+        paymentEntity.externalServiceData = externalData;
+        paymentEntity.amount = utilExternalData.transactionAmount; 
         const paymentStatus = this.payer.convertStatus(utilExternalData.status);
         paymentEntity.paymentStatus = paymentStatus;
+       
         await this.paymentRepositorty.update(paymentEntity);
+
         if (paymentStatus === PaymentStatus.APPROVED){
             // TODO: generar un movimiento...el movimeinto debe actualizar el saldo
             console.log('generar un movimiento...el movimeinto debe actualizar el saldo')
