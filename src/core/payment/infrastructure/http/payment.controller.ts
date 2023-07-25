@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { HttpCode } from "../../../../common/http.codes";
-import { MerchantOrderDTO } from "../mercadopago/domain/dtos/merchant.order.dto";
 import { PaymentCreatedDTO } from "../mercadopago/domain/dtos/payment.created.dto";
 import { PaymentService } from "../../application";
 

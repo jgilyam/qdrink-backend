@@ -1,11 +1,12 @@
 import { PaymentAddDTO } from "../domain/dtos";
 import { IPaymentStrategy } from "../domain/payment.strategy";
+import { MercadoPagoPaymentStrategy } from "../infrastructure/mercadopago/mercadopago.payment.strategy";
 
 export class Payer{
     private paymentStrategy: IPaymentStrategy;
     
-    constructor(paymentStrategy: IPaymentStrategy){
-        this.paymentStrategy = paymentStrategy;
+    constructor(){
+        this.paymentStrategy = new MercadoPagoPaymentStrategy();
     }
     
     setPaymentStrategy = (paymentStrategy: IPaymentStrategy)=>{
@@ -13,6 +14,7 @@ export class Payer{
     }
 
     generatePaymentRequest = async (paymentRequest: PaymentAddDTO, paymentId: string, phone: string) => {
+        console.log('generatePaymentRequest')
         return this.paymentStrategy.createPaymentRequest(paymentRequest, paymentId, phone);
     }
 
