@@ -1,5 +1,5 @@
-import { AccountingCodeEntity } from "./accounting.code.entity";
+import { AccountingCodeEntity, AccountingCodeKind, DebitCreditKind, SaleChannel } from "./accounting.code.entity";
 
 export interface IAccountingCodeRepository {
-    findAll(): Promise<AccountingCodeEntity[]>;
+    findAll(kind?: DebitCreditKind, saleChannel?: SaleChannel, accountingCodeKind?: AccountingCodeKind): Promise<AccountingCodeEntity[]>;
 }
