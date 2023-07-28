@@ -8,10 +8,12 @@ export class TapController {
 
     constructor(private readonly tapService: TapService){}
 
-    add = async(req: Request<{},{},TapAddDTO,{}>, res: Response<TapOutDTO | null,{}>, next: NextFunction)=>{
-        const { body } = req;
+    add = async(req: Request<{salePointId: string},{},TapAddDTO,{}>, res: Response<TapOutDTO | null,{}>, next: NextFunction)=>{
+        const { body, params } = req;
+        const { salePointId } = params
         try {
-            const tap = await this.tapService.add(body);
+        const { salePointId } = params
+            const tap = await this.tapService.add(salePointId, body);
             res.status(HttpCode.CREATED).json(tap);
         } catch (error) {
             next(error);

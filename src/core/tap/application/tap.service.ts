@@ -9,14 +9,17 @@ export class TapService {
     
     constructor(private readonly tapRepository: ITapRepository, private readonly tapMapper: ITapMapper){}
 
-    add = async(tapAddDto: TapAddDTO): Promise<TapOutDTO | null>=>{
+    add = async(salePointId: string, tapAddDto: TapAddDTO): Promise<TapOutDTO | null>=>{
         const { drinkIds } = tapAddDto;
         
         if(drinkIds && drinkIds?.length > 2) throw new MoreThanTwoDrinksExcpetion();
+        
+        // TODO: validar que los ids de las bebidades pertenezacan al punto de venta
+        
         const tapEntity = await this.tapRepository.add(tapAddDto);
     
-        return this.tapMapper.tapEntityToTapOutDTO(tapEntity);
 
+        return this.tapMapper.tapEntityToTapOutDTO(tapEntity);
     }
 
     findByUnitNumber = async(unitNumber: number): Promise<TapOutDTO | null> =>{
