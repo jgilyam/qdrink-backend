@@ -1,6 +1,7 @@
 import { TapAddDTO } from "../domain/dtos/tap.add.dto";
 import { TapOutDTO } from "../domain/dtos/tap.out.dto";
 import { MoreThanTwoDrinksExcpetion } from "../domain/errors/tap.moreThanTwoDrinks.exception";
+import { TapNotFoundExcpetion } from "../domain/errors/tap.notFound.exception";
 import { ITapMapper } from "../domain/tap.mapper";
 import { ITapRepository } from "../domain/tap.repository";
 
@@ -20,6 +21,8 @@ export class TapService {
 
     findByUnitNumber = async(unitNumber: number): Promise<TapOutDTO | null> =>{
         const tapEntity = await this.tapRepository.findByUnitNumber(unitNumber);
+        if(!tapEntity) throw new TapNotFoundExcpetion();
+        
         return this.tapMapper.tapEntityToTapOutDTO(tapEntity);
     }
 
