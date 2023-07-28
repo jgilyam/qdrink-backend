@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { DrinkNotFoundException } from '../../domain';
+import { MoreThanTwoDrinksExcpetion } from '../../domain/errors/tap.moreThanTwoDrinks.exception';
 import { ApiErrorResponse, ApiErrorResponseImpl } from '../../../../common/exception.response';
 import { HttpCode } from '../../../../common/http.codes';
 
-const drinkErrorHandler = async (
+const tapErrorHandler = async (
   error: Error,
   req: Request,
   res: Response,
@@ -12,17 +12,17 @@ const drinkErrorHandler = async (
   try {
     const { method, baseUrl, params, body, query } = req
     let  detail = error.message
-    let code = "drink000"
+    let code = "tap000"
     let httpCode = HttpCode.INTERNAL_SERVER_ERROR
     const instance = `${method} ${baseUrl}`;
     const { stack } = error;
     
     let errorResponse : ApiErrorResponse = new ApiErrorResponseImpl(Error.name, httpCode, detail, instance, code);
 
-    if (error instanceof DrinkNotFoundException){
-      code = "drink001"
-      httpCode = HttpCode.NOT_FOUND
-      errorResponse = new ApiErrorResponseImpl(DrinkNotFoundException.name, httpCode, detail, instance, code)
+    if (error instanceof MoreThanTwoDrinksExcpetion){
+      code = "tap001"
+      httpCode = HttpCode.BAD_REQUEST
+      errorResponse = new ApiErrorResponseImpl(MoreThanTwoDrinksExcpetion.name, httpCode, detail, instance, code)
     }
   
     console.log(JSON.stringify({params, body, query}, undefined, 2))
@@ -32,4 +32,4 @@ const drinkErrorHandler = async (
     return next();
   }
 };
-export default drinkErrorHandler;
+export default tapErrorHandler;
