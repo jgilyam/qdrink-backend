@@ -12,7 +12,7 @@ const drinkErrorHandler = async (
   try {
     const { method, baseUrl, params, body, query } = req
     let  detail = error.message
-    let code = "api001"
+    let code = "drink000"
     let httpCode = HttpCode.INTERNAL_SERVER_ERROR
     const instance = `${method} ${baseUrl}`;
     const { stack } = error;
