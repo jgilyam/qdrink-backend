@@ -7,4 +7,5 @@ export interface ICustomerRepository{
     edit(id: string, customerInDTO: CustomerInDTO): Promise<CustomerEntity | null>;
     findByPhone(phone: string): Promise<CustomerEntity | null>;
     save(customerEntity: CustomerEntity): Promise<CustomerEntity>;
+    findById(customerId: string): Promise<CustomerEntity | null>;
 }
