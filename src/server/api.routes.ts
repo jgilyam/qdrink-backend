@@ -1,8 +1,8 @@
 import { payment } from "mercadopago";
 
 export const apiPaths = {
-  drinks: "/api/drinks",
+  drinks: "/api",
   message: "/api/messages",
   payments: "/api/payments",
-  tap: "/salepoint/:salePointId/taps"
+  tap: "/api"
 };

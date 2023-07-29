@@ -7,11 +7,13 @@ import drinkErrorHandler from "./drink.exception.handler";
 
 const router = Router();
 
-router.post("/", addValidatorRule(), validateFields, drinkController.add);
-router.get("/", drinkController.findAll);
-router.put("/:drinkId", editValidatorRule(), validateFields, drinkController.edit);
-router.delete("/:drinkId", editValidatorRule(), validateFields, drinkController.delete);
+router.post("/salepoints/:salePointId/drinks", addValidatorRule(), validateFields, drinkController.add);
+router.get("/salepoints/:salePointId/drinks", drinkController.findAll);
+router.put("/salepoints/:salePointId/drinks/:drinkId", editValidatorRule(), validateFields, drinkController.edit);
+router.delete("salepoints/:salePointId/drinks/:drinkId", editValidatorRule(), validateFields, drinkController.delete);
 
 router.use(drinkErrorHandler)
 
 export default router;
+
+// TODO: agregar validacion estatica de los id...deben ser de mongo 

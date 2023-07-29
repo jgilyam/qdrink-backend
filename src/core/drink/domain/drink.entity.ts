@@ -1,3 +1,5 @@
+import { SalePointEntity } from "../../sale-point/domain/sale.point.entity";
+
 export interface DrinkEntity{
     id?: string;
     name: string;
@@ -6,4 +8,5 @@ export interface DrinkEntity{
     image?: string;
     ibu?: string;
     alcoholContent: string;
+    salePoint: SalePointEntity;
 }

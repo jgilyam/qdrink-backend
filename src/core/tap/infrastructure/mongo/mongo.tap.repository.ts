@@ -6,13 +6,18 @@ import { Tap } from "./mongo.tap.model";
 export class MongoTapRepository implements ITapRepository {
     findByUnitNumber = async (unitNumber: number): Promise<TapEntity | null> => {
         const tap = await Tap.findOne({unitNumber})
-        return tap;
+        if(!tap) return tap;
+        
+        return await tap.populate("drinks");
     }
     add = async(tapInDto: TapAddDTO): Promise<TapEntity> => {
+        const {drinkIds, unitNumber} = tapInDto
         const tap = new Tap({
-            ...tapInDto,
+            unitNumber,
+            drinks: drinkIds
         });
-        return await tap.save();
+        const result = await tap.save();
+        return await result.populate("drinks");
     }
 
 }

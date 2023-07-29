@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
 import { AccountingCode } from "../../core/accounting-code/infrastructure/mongo/mongo.accounting.code.model";
 import { DebitCreditKind, AccountingCodeKind, SaleChannel } from "../../core/accounting-code/domain/accounting.code.entity";
 
 require("dotenv").config();
 
-
 mongoose
-.connect(process.env.MONGODB_CNN)
+.connect(process.env.MONGODB_CNN ?? "")
 .catch((err: any) => {
     console.log(err);
     process.exit(1);

@@ -7,14 +7,14 @@ export class DrinkService {
     private readonly drinkMapper: IDrinkMapper
   ) {}
 
-  add = async (drinkAddDTO: DrinkInDTO): Promise<DrinkOutDTO | null> => {
-    const drinkEntity = await this.drinkRepository.add(drinkAddDTO);
+  add = async (salePointId: string, drinkAddDTO: DrinkInDTO): Promise<DrinkOutDTO | null> => {
+    const drinkEntity = await this.drinkRepository.add(salePointId, drinkAddDTO);
     
     return this.drinkMapper.drinkEntityToDrinkOutDTO(drinkEntity);
   };
 
-  findAllDrinks = async (): Promise<Page<DrinkOutDTO | null>> => {
-    const drinks = await this.drinkRepository.findAll();
+  findAllDrinks = async (salePointId: string): Promise<Page<DrinkOutDTO | null>> => {
+    const drinks = await this.drinkRepository.findAll(salePointId);
     const drinksOutDTO = drinks.map((drink) =>
       this.drinkMapper.drinkEntityToDrinkOutDTO(drink)
     );
@@ -22,16 +22,16 @@ export class DrinkService {
     return new PageImpl(drinksOutDTO, drinksOutDTO.length);
   };
 
-  edit = async (id: string, drinkAddDTO: DrinkInDTO): Promise<DrinkOutDTO | null> =>{
-    await this.findDrinkEntityById(id);
-    const drinkEdited = await this.drinkRepository.edit(id, drinkAddDTO);
+  edit = async (drinkId: string, drinkAddDTO: DrinkInDTO): Promise<DrinkOutDTO | null> =>{
+    await this.findDrinkEntityById(drinkId);
+    const drinkEdited = await this.drinkRepository.edit(drinkId, drinkAddDTO);
     
     return this.drinkMapper.drinkEntityToDrinkOutDTO(drinkEdited);
   }
 
-  delete = async (id: string): Promise<DrinkOutDTO | null> =>{
-    await this.findDrinkEntityById(id);
-    const drink = await this.drinkRepository.deleteById(id);
+  delete = async (drinkId: string): Promise<DrinkOutDTO | null> =>{
+    await this.findDrinkEntityById(drinkId);
+    const drink = await this.drinkRepository.deleteById(drinkId);
     
     return this.drinkMapper.drinkEntityToDrinkOutDTO(drink);
   }
