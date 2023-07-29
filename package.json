@@ -34,7 +34,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "devJs": "nodemon dist/app.js",
     "devTs": "tsc --watch",
-    "db:seed": " npx ts-node ./src/db/seeders/minimal_accounting_codes.ts"
+    "db:seed": "npx ts-node ./src/db/seeders/minimal_sale_point.ts"
   },
   "repository": {
     "type": "git",

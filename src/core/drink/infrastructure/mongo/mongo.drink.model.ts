@@ -8,6 +8,7 @@ const drinkSchema = new Schema<DrinkEntity>({
     image: { type: String, required: false },
     ibu: { type: String, required: false },
     alcoholContent: { type: String, required: true },
+    salePoint: { type: Schema.Types.ObjectId, ref: "SalePoint", required: true },
   });
   
   export const Drink = model<DrinkEntity>("Drink", drinkSchema);
