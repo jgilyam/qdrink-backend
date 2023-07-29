@@ -27,4 +27,7 @@ export class MongoCustomerRepository implements ICustomerRepository{
         })
         return await newCustomer.save();
     }
+    findById = async(customerId: string): Promise<CustomerEntity | null> => {
+        return await Customer.findById(customerId);
+    }
 }

@@ -1,4 +1,6 @@
 import { ICustomerMapper, ICustomerRepository, CustomerOutDTO, CustomerInDTO } from "../domain";
+import { BalanceOperation } from "../domain/enums/operation.enum";
+import { CustomerNotFoundException } from "../domain/errors/customer.notFound.exception";
 
 
 export class CustomerService {
@@ -13,6 +15,17 @@ export class CustomerService {
         const customerEntity = this.customerMapper.customerInDTOToCustomerEntity(customerInDTO);
         const customerSaved = await this.customerRepository.save(customerEntity); 
         return this.customerMapper.customerEntityToCustomerOutDTO(customerSaved);
+    }
+
+    updateBalance = async(opration: BalanceOperation, amount: number, customerid: string) =>{
+        let customer = await this.customerRepository.findById(customerid);
+
+        if(!customer) throw new CustomerNotFoundException();
+
+        const amountToAdd = (opration * amount) + customer.balance;
+        customer.balance = amountToAdd;
+        return await this.customerRepository.save(customer);
+    
     }
 
 }
