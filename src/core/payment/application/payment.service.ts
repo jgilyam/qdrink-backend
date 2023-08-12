@@ -1,11 +1,17 @@
+import { AccountingCodeKind, DebitCreditKind, SaleChannel } from "../../accounting-code/domain/accounting.code.entity";
 import { CustomerOutDTO } from "../../customer/domain";
+import { MovementService } from "../../movement/application/movement.service";
+import { MovementAddDTO } from "../../movement/domain/dtos/movement.add.dto";
 import { IPaymentRepository, PaymentAddDTO, PaymentEntity, PaymentStatus } from "../domain";
 import { Payer } from "./payer";
 
 export class PaymentService{
     private payer :Payer;
-    constructor(private readonly paymentRepositorty: IPaymentRepository){
+    private readonly accountingCodeService;
+
+    constructor(private readonly paymentRepositorty: IPaymentRepository, private readonly movementService: MovementService){
      this.payer = new Payer();
+     this.accountingCodeService = movementService.getAccountingCodeService();
     }
     addNewPayment = async(amount: number, customer: CustomerOutDTO, phone: string): Promise<string>=>{
         const {id: customerId} =  customer;
@@ -26,16 +32,31 @@ export class PaymentService{
         const externalData = await this.payer.findPaymentDetails(externalPaymentId);
         const { utilExternalData } = externalData
         const paymentEntity = await this.findPaymentEntityById(ownPaymentId);
+        const amount = utilExternalData.transactionAmount; 
+        const { customer } = paymentEntity;
+        const { id: customerId }  = customer;
         
         paymentEntity.externalServiceData = externalData;
-        paymentEntity.amount = utilExternalData.transactionAmount; 
+        paymentEntity.amount = amount
         const paymentStatus = this.payer.convertStatus(utilExternalData.status);
         paymentEntity.paymentStatus = paymentStatus;
        
         await this.paymentRepositorty.update(paymentEntity);
 
         if (paymentStatus === PaymentStatus.APPROVED){
-            // TODO: generar un movimiento...el movimeinto debe actualizar el saldo
+            
+            const accotiungCodes = await this.accountingCodeService.findAll(DebitCreditKind.CREDIT, SaleChannel.ONLINE, AccountingCodeKind.CREDIT_PAYMENT);
+            const  accotiungCode = accotiungCodes[0]
+            if(!accotiungCode) throw new Error("No existe el codigo contable")
+            const {id: accountingCodeId} = accotiungCode
+        
+            const movement: MovementAddDTO = {
+                id: "",
+                amount,
+                accountingCodeId
+            }
+            
+            this.movementService.addMovementToCustomer(customerId as string, movement);
             console.log('generar un movimiento...el movimeinto debe actualizar el saldo')
             console.log(JSON.stringify(paymentEntity, undefined, 2))
         }
