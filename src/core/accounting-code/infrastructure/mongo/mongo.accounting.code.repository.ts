@@ -2,7 +2,10 @@ import { DebitCreditKind, SaleChannel, AccountingCodeKind, AccountingCodeEntity 
 import { IAccountingCodeRepository } from "../../domain/accounting.code.repository";
 import { AccountingCode } from "./mongo.accounting.code.model";
 
-export class AccounitngCodeRepository implements IAccountingCodeRepository{
+export class MongoAccounitngCodeRepository implements IAccountingCodeRepository{
+    findById(id: string): Promise<AccountingCodeEntity | null> {
+        throw new Error("Method not implemented.");
+    }
     findAll = async(kind?: DebitCreditKind | undefined, saleChannel?: SaleChannel | undefined, accountingCodeKind?: AccountingCodeKind | undefined): Promise<AccountingCodeEntity[]> => {
         const filters = {};
 

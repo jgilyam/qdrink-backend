@@ -2,4 +2,5 @@ import { AccountingCodeEntity, AccountingCodeKind, DebitCreditKind, SaleChannel 
 
 export interface IAccountingCodeRepository {
     findAll(kind?: DebitCreditKind, saleChannel?: SaleChannel, accountingCodeKind?: AccountingCodeKind): Promise<AccountingCodeEntity[]>;
+    findById(id: string): Promise<AccountingCodeEntity | null>;
 }
