@@ -27,5 +27,9 @@ export class CustomerService {
         return await this.customerRepository.save(customer);
     
     }
+    findById = async(customerId: string): Promise<CustomerOutDTO | null> =>{
+        const customer = await this.customerRepository.findById(customerId);
+        return this.customerMapper.customerEntityToCustomerOutDTO(customer);
+    }
 
 }
