@@ -8,6 +8,7 @@ import drinkRouter from "../core/drink/infrastructure/http/drink.router"
 import messageRouter from "../core/messages/infrastructure/http/messager.router"
 import paymentRouter from "../core/payment/infrastructure/http/payment.router"
 import tapRouter from "../core/tap/infrastructure/http/tap.router"
+import authRouter from "../core/auth/infrastructure/http/auth.router"
 
 
 class Server {
@@ -46,6 +47,7 @@ class Server {
     this.app.use(this.apiPaths.message, messageRouter);
     this.app.use(this.apiPaths.payments, paymentRouter);
     this.app.use(this.apiPaths.tap, tapRouter);
+    this.app.use(this.apiPaths.auth, authRouter);
   }
 
   listen() {

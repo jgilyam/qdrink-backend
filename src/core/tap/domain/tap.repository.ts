@@ -3,5 +3,6 @@ import { TapEntity } from "./tap.entity";
 
 export interface ITapRepository {
     findByUnitNumber(unitNumber: number): Promise<TapEntity | null>;
-    add(tapInDto: TapAddDTO): Promise<TapEntity>;
+    add(salePointId: string, tapInDto: TapAddDTO): Promise<TapEntity>;
+    findById(tapId: string): Promise<TapEntity | null>;
 }
