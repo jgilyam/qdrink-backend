@@ -6,6 +6,6 @@ import { TapController } from "./infrastructure/http/tap.controller";
 
 const mongoTapRepository = new MongoTapRepository();
 const tapMapper = new TapMapper(drinkMapper);
-const tapService = new TapService(mongoTapRepository, tapMapper);
+export const tapService = new TapService(mongoTapRepository, tapMapper);
 
 export const tapController = new TapController(tapService);

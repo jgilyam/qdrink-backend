@@ -3,6 +3,7 @@ import { TapAddDTO } from '../../domain/dtos/tap.add.dto';
 import { TapOutDTO } from '../../domain/dtos/tap.out.dto';
 import { TapService } from '../../application/tap.service';
 import { HttpCode } from '../../../../common/http.codes';
+import { LanguageRequest } from '../../../auth/infrastructure/authentication.middelware';
 
 export class TapController {
 
@@ -20,13 +21,17 @@ export class TapController {
         }
     }
 
-    findByUnitNumber = async(req: Request<{},{},{},{unitNumber: number}>, res: Response<TapOutDTO | null,{}>, next: NextFunction)=>{
-        const { unitNumber } = req.query;
+    findByUnitNumber = async(req: LanguageRequest, res: Response<TapOutDTO | null,{}>, next: NextFunction)=>{
+        const  { tapId }  = req;
+
+        if(!tapId) throw new Error("Unknow who send the request")
+        
         try {
-            const tap = await this.tapService.findByUnitNumber(unitNumber);
+            const tap = await this.tapService.findById(tapId);
             res.status(HttpCode.OK).json(tap);
         } catch (error) {
             next(error);
         }
     }
+
 }
