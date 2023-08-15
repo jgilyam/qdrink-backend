@@ -1,14 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import { AuthService } from '../application/auth.service';
 import { HttpCode } from '../../../common/http.codes';
+import { Payload } from '../../../common/jwt.utils';
 
-export interface LanguageRequest extends Request {
-    tapId?: string
+export interface UserRequest extends Request {
+    user?: Payload,
+    customerId?: string;
 }
 
 export class AuthenticationMiddelware{
     constructor(private readonly authService: AuthService){}
-    authenticate = async(req: LanguageRequest, res: Response, next: NextFunction)=>{
+    authenticate = async(req: UserRequest, res: Response, next: NextFunction)=>{
         const { authorization } = req.headers;
 
         if (!authorization) {
@@ -18,7 +20,7 @@ export class AuthenticationMiddelware{
         const token = authorization.split(' ')[1];
 
         const tap = await this.authService.authenticate(token);
-        req.tapId = tap;
+        req.user = tap;
         return next();
     }
   }

@@ -4,7 +4,7 @@ import { MockMessager } from "./infrastructure/mock-messager/mock.messager";
 
 import { WhatsappWebMessager } from "./infrastructure/whatsapp-web-js/whatsapp.web.messager";
 import { WhatsappWebController } from "./infrastructure/whatsapp-web-js/whatsapp.controller";
-import { customerService } from "../customer/dependencies";
+import { customerService } from "../customer/customer.dependencies";
 import { whatsappWebClient } from "./infrastructure/whatsapp-web-js/connectionWclient"
 import { paymentService } from "../payment/payment.dependencies";
 

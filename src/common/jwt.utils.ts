@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import { config } from "../config/config";
 
-interface Payload{
+export interface Payload{
     sub: string | undefined;
     rol: string;
 }
