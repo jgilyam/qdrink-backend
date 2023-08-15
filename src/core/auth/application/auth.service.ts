@@ -1,3 +1,4 @@
+import { Payload } from "../../../common/jwt.utils";
 import { TapLoginDTO } from "../domain/dtos/tap.login.dto";
 import { IIdentityProvider } from "../domain/identity.provider";
 
@@ -11,8 +12,7 @@ export class AuthService{
         return { token };
     }
 
-    authenticate = async(token: string)=>{
-        const user = await this.identityProvider.authenticate(token);
-        return user;
+    authenticate = async(token: string): Promise<Payload>=>{
+        return this.identityProvider.authenticate(token);
     }
 }
