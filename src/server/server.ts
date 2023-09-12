@@ -9,6 +9,7 @@ import messageRouter from "../core/messages/infrastructure/http/messager.router"
 import paymentRouter from "../core/payment/infrastructure/http/payment.router"
 import tapRouter from "../core/tap/infrastructure/http/tap.router"
 import authRouter from "../core/auth/infrastructure/http/auth.router"
+import customerRouter from "../core/customer/infrastructure/http/customer.router"
 
 
 class Server {
@@ -48,6 +49,7 @@ class Server {
     this.app.use(this.apiPaths.payments, paymentRouter);
     this.app.use(this.apiPaths.tap, tapRouter);
     this.app.use(this.apiPaths.auth, authRouter);
+    this.app.use(this.apiPaths.customer, customerRouter);
   }
 
   listen() {

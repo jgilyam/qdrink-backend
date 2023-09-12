@@ -5,5 +5,6 @@ export const apiPaths = {
   message: "/api/messages",
   payments: "/api/payments",
   tap: "/api",
-  auth: "/api/auth"
+  auth: "/api/auth",
+  customer: "/api/customer",
 };

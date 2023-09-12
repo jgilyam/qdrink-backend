@@ -40,6 +40,7 @@ class RequestQrCodeHandler implements MessageHandler {
         });
         
         this.qrImage = await generateQrCode(token);
+        console.log({token})
     }
     reply(): string {
         

@@ -10,7 +10,7 @@ export interface Payload{
 export const signCustomer = async (payload: Payload)=>{
     const {secretJwt} = config
     // TODO: sacar el data
-    const token = jwt.sign({ data: payload }, secretJwt , { expiresIn: '8h' });
+    const token = jwt.sign( payload , secretJwt , { expiresIn: '8h' });
     return token;
 }
 

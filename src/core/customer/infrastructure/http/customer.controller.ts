@@ -9,8 +9,8 @@ export class CustomerController{
 
     findById = async(req: UserRequest, res: Response<CustomerOutDTO | null,{}>, next: NextFunction)=>{
         const  { user }  = req;
-
-        if(!user || !user.sub) throw new Error("Unknow who send the request")
+        
+        if(!user || !(user.sub)) throw new Error("Unknow who send the request")
         const {sub, rol} = user;
         if (rol!=="customer") throw new Error("Wrong rol request")
         try {
