@@ -27,7 +27,7 @@
     "qrcode": "^1.5.3",
     "qrcode-terminal": "^0.12.0",
     "sinon": "^15.2.0",
-    "whatsapp-web.js": "^1.21.0"
+    "whatsapp-web.js": "^1.22.1"
   },
   "name": "qdrink-backend",
   "version": "1.0.0",
