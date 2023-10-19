@@ -19,8 +19,12 @@ export class AuthenticationMiddelware{
 
         const token = authorization.split(' ')[1];
 
-        const tap = await this.authService.authenticate(token);
-        req.user = tap;
+        try {
+            const tap = await this.authService.authenticate(token);
+            req.user = tap;
+        } catch (error) {
+            return next(error)
+        }
         return next();
     }
   }
