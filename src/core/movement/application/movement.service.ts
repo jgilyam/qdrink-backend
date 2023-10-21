@@ -44,7 +44,7 @@ export class MovementService{
         const{ priceLiter } = drink;
 
         const customer = await this.customerService.findEntityById(customerId);
-        const tap = await this.tapService.findEntityById(customerId);
+        const tap = await this.tapService.findEntityById(tapId);
         
         const consumption: Consumption = {
             quantity,
@@ -64,8 +64,9 @@ export class MovementService{
         
         const operation = this.debitCreditKindToBalanceOperation(kind);
 
-        this.customerService.updateBalance(operation, movementEntitySaved.amount, customerId)
-        return movementEntitySaved;
+        const customerWithBalanceUpdated = await this.customerService.updateBalance(operation, movementEntitySaved.amount, customerId)
+        movementEntitySaved.customer = customerWithBalanceUpdated;
+        return this.movementMapper.movementEntityToConsuptionOudDTO(movementEntitySaved);
 
     }
 

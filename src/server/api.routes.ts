@@ -7,4 +7,5 @@ export const apiPaths = {
   tap: "/api",
   auth: "/api/auth",
   customer: "/api/customer",
+  movements: "/api/movements"
 };

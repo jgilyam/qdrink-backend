@@ -24,7 +24,8 @@ export class CustomerService {
 
         const amountToAdd = (opration * amount) + customer.balance;
         customer.balance = amountToAdd;
-        return await this.customerRepository.save(customer);
+        const s = await  this.customerRepository.save(customer);
+        return s
     
     }
     findById = async(customerId: string): Promise<CustomerOutDTO | null> =>{
@@ -32,8 +33,8 @@ export class CustomerService {
         return this.customerMapper.customerEntityToCustomerOutDTO(customer);
     }
     findEntityById = async(customerId: string): Promise<CustomerEntity> =>{
-        const customer =  this.customerRepository.findById(customerId);
-        if(customer!==null) throw new CustomerNotFoundException();
+        const customer =  await this.customerRepository.findById(customerId);
+        if(!customer) throw new CustomerNotFoundException();
 
         return customer;
     }

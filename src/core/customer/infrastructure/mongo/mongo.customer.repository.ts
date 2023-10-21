@@ -22,10 +22,12 @@ export class MongoCustomerRepository implements ICustomerRepository{
     }
 
     save = async(customerEntity: CustomerEntity): Promise<CustomerEntity> => {
-        const newCustomer = new Customer({
-            ...customerEntity
-        })
-        return await newCustomer.save();
+        const {id} = customerEntity;
+        if(!id) throw new Error("Id not found")
+        await Customer.findByIdAndUpdate(id, {
+            ...customerEntity,
+          });
+          return customerEntity
     }
     findById = async(customerId: string): Promise<CustomerEntity | null> => {
         return await Customer.findById(customerId);
