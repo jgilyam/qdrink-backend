@@ -3,4 +3,5 @@ import { MovementEntity } from "./movement.entity";
 
 export interface IMovementRepository{
     add(customerId: string, movementAddDTO: MovementAddDTO): Promise<MovementEntity>;
+    save(movementEntity: MovementEntity): Promise<MovementEntity>;
 }

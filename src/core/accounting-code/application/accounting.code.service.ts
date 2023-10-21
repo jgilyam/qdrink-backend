@@ -21,4 +21,10 @@ export class AccountingCodeService {
         const accountingCodeEntity = await this.findAccountingCodeEntityById(id);    
         return this.accountingCodeMapper.customerEntityToAccountingCodeOutDTO(accountingCodeEntity);
     }
+
+    findOne = async (kind: DebitCreditKind, saleChannel: SaleChannel, accountingCodeKind: AccountingCodeKind) =>{
+        const accountingCodeEntities = await this.accountingCodeRepository.findAll(kind, saleChannel, accountingCodeKind);
+        if(accountingCodeEntities.length===0) throw new Error("Accounting Code not found")
+        return accountingCodeEntities[0];
+    }
 }

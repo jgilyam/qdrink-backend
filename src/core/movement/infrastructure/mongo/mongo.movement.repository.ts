@@ -8,7 +8,14 @@ export class MongoMovementRepository implements IMovementRepository{
         const movementEntity = new Movement({
             ...movementAddDTO,
             customer: customerId
-          });
-          return await movementEntity.save();
+        });
+        return await movementEntity.save();
+    }
+    save = async(movementEntity: MovementEntity): Promise<MovementEntity> => {
+        const result = new Movement({
+            ...movementEntity,
+
+        });
+        return await result.save();
     }
 }

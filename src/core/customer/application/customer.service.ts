@@ -1,4 +1,4 @@
-import { ICustomerMapper, ICustomerRepository, CustomerOutDTO, CustomerInDTO } from "../domain";
+import { ICustomerMapper, ICustomerRepository, CustomerOutDTO, CustomerInDTO, CustomerEntity } from "../domain";
 import { BalanceOperation } from "../domain/enums/operation.enum";
 import { CustomerNotFoundException } from "../domain/errors/customer.notFound.exception";
 
@@ -30,6 +30,12 @@ export class CustomerService {
     findById = async(customerId: string): Promise<CustomerOutDTO | null> =>{
         const customer = await this.customerRepository.findById(customerId);
         return this.customerMapper.customerEntityToCustomerOutDTO(customer);
+    }
+    findEntityById = async(customerId: string): Promise<CustomerEntity> =>{
+        const customer =  this.customerRepository.findById(customerId);
+        if(customer!==null) throw new CustomerNotFoundException();
+
+        return customer;
     }
 
 }

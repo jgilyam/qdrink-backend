@@ -37,4 +37,11 @@ export class TapService {
         return this.tapMapper.tapEntityToTapOutDTO(tapEntity);
     }
 
+    findEntityById = async(tapId: string): Promise<TapEntity> =>{
+        const tapEntity = await this.tapRepository.findById(tapId);
+        if(tapEntity===null) throw new TapNotFoundExcpetion();
+        
+        return tapEntity
+    }
+
 }
