@@ -5,7 +5,11 @@ const apiWhatsappEnabled: boolean  = JSON.parse(process.env.API_WHATSAPP_BUSSINE
 console.log(`apiWhatsappEnabled: ${apiWhatsappEnabled}`)
 
 const options: ClientOptions = {
-    authStrategy: new LocalAuth()
+    authStrategy: new LocalAuth(),
+    puppeteer: {
+      headless: true,
+      args: ['--no-sandbox']
+  }
 }
 
 export const whatsappWebClient = new Client(options);
